@@ -4,5 +4,15 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
-import * as enums from "../types/enums";
+
+export interface ChallengeDynamicIaCRequirements {
+    /**
+     * Behavior if not unlocked, either hidden or anonymized.
+     */
+    behavior: string;
+    /**
+     * List of the challenges ID.
+     */
+    prerequisites?: string[];
+}
 

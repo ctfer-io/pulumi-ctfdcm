@@ -1,0 +1,26 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "ctfdcm_challenge_dynamiciac": {
+                "current": "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC",
+                "majorVersion": 1,
+                "fields": {
+                    "requirements": {
+                        "fields": {
+                            "prerequisites": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "topics": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {}
+}

@@ -7,17 +7,44 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Ctfdcm
 {
     /// <summary>
-    /// The provider type for the xyz package. By default, resources use package-wide configuration
+    /// The provider type for the ctfdcm package. By default, resources use package-wide configuration
     /// settings, however an explicit `Provider` instance may be created and passed during resource
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
-    [XyzResourceType("pulumi:providers:xyz")]
+    [CtfdcmResourceType("pulumi:providers:ctfdcm")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
+        /// <summary>
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
+        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
+        /// policy.
+        /// </summary>
+        [Output("apiKey")]
+        public Output<string?> ApiKey { get; private set; } = null!;
+
+        /// <summary>
+        /// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+        /// </summary>
+        [Output("nonce")]
+        public Output<string?> Nonce { get; private set; } = null!;
+
+        /// <summary>
+        /// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
+        /// </summary>
+        [Output("session")]
+        public Output<string?> Session { get; private set; } = null!;
+
+        /// <summary>
+        /// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
+        /// </summary>
+        [Output("url")]
+        public Output<string?> Url { get; private set; } = null!;
+
+
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
@@ -26,7 +53,7 @@ namespace Pulumi.Xyz
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
-            : base("xyz", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+            : base("ctfdcm", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -35,6 +62,13 @@ namespace Pulumi.Xyz
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/",
+                AdditionalSecretOutputs =
+                {
+                    "apiKey",
+                    "nonce",
+                    "session",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -45,11 +79,61 @@ namespace Pulumi.Xyz
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
+        [Input("apiKey")]
+        private Input<string>? _apiKey;
+
         /// <summary>
-        /// A region which should be used.
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
+        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
+        /// policy.
         /// </summary>
-        [Input("region", json: true)]
-        public Input<Pulumi.Xyz.Region.Region>? Region { get; set; }
+        public Input<string>? ApiKey
+        {
+            get => _apiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("nonce")]
+        private Input<string>? _nonce;
+
+        /// <summary>
+        /// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+        /// </summary>
+        public Input<string>? Nonce
+        {
+            get => _nonce;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _nonce = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("session")]
+        private Input<string>? _session;
+
+        /// <summary>
+        /// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
+        /// </summary>
+        public Input<string>? Session
+        {
+            get => _session;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _session = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public ProviderArgs()
         {

@@ -2,20 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
-import * as enums from "./types/enums";
 import * as utilities from "./utilities";
 
 /**
- * The provider type for the xyz package. By default, resources use package-wide configuration
+ * The provider type for the ctfdcm package. By default, resources use package-wide configuration
  * settings, however an explicit `Provider` instance may be created and passed during resource
  * construction to achieve fine-grained programmatic control over provider settings. See the
  * [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
  */
 export class Provider extends pulumi.ProviderResource {
     /** @internal */
-    public static readonly __pulumiType = 'xyz';
+    public static readonly __pulumiType = 'ctfdcm';
 
     /**
      * Returns true if the given object is an instance of Provider.  This is designed to work even
@@ -28,6 +25,24 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
+    /**
+     * User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
+     * authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
+     * policy.
+     */
+    public readonly apiKey!: pulumi.Output<string | undefined>;
+    /**
+     * User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+     */
+    public readonly nonce!: pulumi.Output<string | undefined>;
+    /**
+     * User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
+     */
+    public readonly session!: pulumi.Output<string | undefined>;
+    /**
+     * CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
+     */
+    public readonly url!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -40,9 +55,14 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["region"] = args ? args.region : undefined;
+            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
+            resourceInputs["nonce"] = args?.nonce ? pulumi.secret(args.nonce) : undefined;
+            resourceInputs["session"] = args?.session ? pulumi.secret(args.session) : undefined;
+            resourceInputs["url"] = args ? args.url : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apiKey", "nonce", "session"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -52,7 +72,21 @@ export class Provider extends pulumi.ProviderResource {
  */
 export interface ProviderArgs {
     /**
-     * A region which should be used.
+     * User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
+     * authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
+     * policy.
      */
-    region?: pulumi.Input<enums.region.Region>;
+    apiKey?: pulumi.Input<string>;
+    /**
+     * User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+     */
+    nonce?: pulumi.Input<string>;
+    /**
+     * User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
+     */
+    session?: pulumi.Input<string>;
+    /**
+     * CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
+     */
+    url?: pulumi.Input<string>;
 }

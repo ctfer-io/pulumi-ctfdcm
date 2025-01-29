@@ -1,0 +1,457 @@
+{
+    "name": "ctfdcm",
+    "displayName": "CTFd-Chall-Manager",
+    "description": "The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code.",
+    "keywords": [
+        "pulumi",
+        "ctfd",
+        "chall-manager",
+        "category/utility"
+    ],
+    "homepage": "https://ctfer.io",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`ctfdcm` Terraform Provider](https://github.com/ctfer-io/terraform-provider-ctfdcm).",
+    "repository": "https://github.com/ctfer-io/pulumi-ctfdcm",
+    "logoUrl": "https://raw.githubusercontent.com/ctfer-io/pulumi-ctfdcm/main/res/logo.png",
+    "pluginDownloadURL": "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/",
+    "publisher": "CTFer.io",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true
+        },
+        "go": {
+            "importBasePath": "github.com/ctfer-io/pulumi-ctfdcm/sdk/go/ctfdcm",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "nodejs": {
+            "packageDescription": "The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/ctfer-io/terraform-provider-ctfdcm)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-ctfdcm` repo](https://github.com/ctfer-io/pulumi-ctfdcm/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-ctfdcm` repo](https://github.com/ctfer-io/terraform-provider-ctfdcm/issues).",
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
+        },
+        "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/ctfer-io/terraform-provider-ctfdcm)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-ctfdcm` repo](https://github.com/ctfer-io/pulumi-ctfdcm/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-ctfdcm` repo](https://github.com/ctfer-io/terraform-provider-ctfdcm/issues).",
+            "compatibility": "tfbridge20",
+            "respectSchemaVersion": true,
+            "pyproject": {
+                "enabled": true
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "apiKey": {
+                "type": "string",
+                "description": "User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to\nauthenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation\npolicy.\n",
+                "secret": true
+            },
+            "nonce": {
+                "type": "string",
+                "description": "User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.\n",
+                "secret": true
+            },
+            "session": {
+                "type": "string",
+                "description": "User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.\n"
+            }
+        }
+    },
+    "types": {
+        "ctfdcm:index/ChallengeDynamicIaCRequirements:ChallengeDynamicIaCRequirements": {
+            "properties": {
+                "behavior": {
+                    "type": "string",
+                    "description": "Behavior if not unlocked, either hidden or anonymized.\n"
+                },
+                "prerequisites": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of the challenges ID.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "behavior"
+                    ]
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the ctfdcm package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apiKey": {
+                "type": "string",
+                "description": "User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to\nauthenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation\npolicy.\n",
+                "secret": true
+            },
+            "nonce": {
+                "type": "string",
+                "description": "User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.\n",
+                "secret": true
+            },
+            "session": {
+                "type": "string",
+                "description": "User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.\n"
+            }
+        },
+        "inputProperties": {
+            "apiKey": {
+                "type": "string",
+                "description": "User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to\nauthenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation\npolicy.\n",
+                "secret": true
+            },
+            "nonce": {
+                "type": "string",
+                "description": "User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.\n",
+                "secret": true
+            },
+            "session": {
+                "type": "string",
+                "description": "User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.\n"
+            }
+        }
+    },
+    "resources": {
+        "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC": {
+            "description": "CTFd is built around the Challenge resource, which contains all the attributes to define a part of the Capture The Flag event.\n\nThis implementation has support of a more dynamic behavior for its scoring through time/solves thus is different from a standard challenge.\n\n",
+            "properties": {
+                "attribution": {
+                    "type": "string",
+                    "description": "Attribution to the creator(s) of the challenge.\n"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Category of the challenge that CTFd groups by on the web UI.\n"
+                },
+                "connectionInfo": {
+                    "type": "string",
+                    "description": "Connection Information to connect to the challenge instance, useful for pwn, web and infrastructure pentests.\n"
+                },
+                "decay": {
+                    "type": "integer",
+                    "description": "The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the challenge, consider using multiline descriptions for better style.\n"
+                },
+                "destroyOnFlag": {
+                    "type": "boolean",
+                    "description": "Whether to destroy the instance once flagged.\n"
+                },
+                "function": {
+                    "type": "string",
+                    "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
+                },
+                "manaCost": {
+                    "type": "integer",
+                    "description": "The cost (in mana) of the challenge once an instance is deployed.\n"
+                },
+                "maxAttempts": {
+                    "type": "integer",
+                    "description": "Maximum amount of attempts before being unable to flag the challenge.\n"
+                },
+                "minimum": {
+                    "type": "integer",
+                    "description": "The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the challenge, displayed as it.\n"
+                },
+                "next": {
+                    "type": "integer",
+                    "description": "Suggestion for the end-user as next challenge to work on.\n"
+                },
+                "requirements": {
+                    "$ref": "#/types/ctfdcm:index/ChallengeDynamicIaCRequirements:ChallengeDynamicIaCRequirements",
+                    "description": "List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.\n"
+                },
+                "scenarioId": {
+                    "type": "string",
+                    "description": "The file's ID of the scenario.\n"
+                },
+                "shared": {
+                    "type": "boolean",
+                    "description": "Whether the instance will be shared between all players.\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of the challenge, either hidden or visible.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.\n"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "The timeout (in seconds) after which the instance will be janitored.\n"
+                },
+                "topics": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of challenge topics that are displayed to the administrators for maintenance and planification.\n"
+                },
+                "until": {
+                    "type": "string",
+                    "description": "The date until the instance could run before being janitored.\n"
+                },
+                "value": {
+                    "type": "integer",
+                    "description": "The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.\n"
+                }
+            },
+            "required": [
+                "category",
+                "connectionInfo",
+                "decay",
+                "description",
+                "destroyOnFlag",
+                "function",
+                "manaCost",
+                "maxAttempts",
+                "minimum",
+                "name",
+                "scenarioId",
+                "shared",
+                "state",
+                "tags",
+                "timeout",
+                "topics",
+                "until",
+                "value"
+            ],
+            "inputProperties": {
+                "attribution": {
+                    "type": "string",
+                    "description": "Attribution to the creator(s) of the challenge.\n"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Category of the challenge that CTFd groups by on the web UI.\n"
+                },
+                "connectionInfo": {
+                    "type": "string",
+                    "description": "Connection Information to connect to the challenge instance, useful for pwn, web and infrastructure pentests.\n"
+                },
+                "decay": {
+                    "type": "integer",
+                    "description": "The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the challenge, consider using multiline descriptions for better style.\n"
+                },
+                "destroyOnFlag": {
+                    "type": "boolean",
+                    "description": "Whether to destroy the instance once flagged.\n"
+                },
+                "function": {
+                    "type": "string",
+                    "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
+                },
+                "manaCost": {
+                    "type": "integer",
+                    "description": "The cost (in mana) of the challenge once an instance is deployed.\n"
+                },
+                "maxAttempts": {
+                    "type": "integer",
+                    "description": "Maximum amount of attempts before being unable to flag the challenge.\n"
+                },
+                "minimum": {
+                    "type": "integer",
+                    "description": "The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the challenge, displayed as it.\n"
+                },
+                "next": {
+                    "type": "integer",
+                    "description": "Suggestion for the end-user as next challenge to work on.\n"
+                },
+                "requirements": {
+                    "$ref": "#/types/ctfdcm:index/ChallengeDynamicIaCRequirements:ChallengeDynamicIaCRequirements",
+                    "description": "List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.\n"
+                },
+                "scenarioId": {
+                    "type": "string",
+                    "description": "The file's ID of the scenario.\n"
+                },
+                "shared": {
+                    "type": "boolean",
+                    "description": "Whether the instance will be shared between all players.\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of the challenge, either hidden or visible.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.\n"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "The timeout (in seconds) after which the instance will be janitored.\n"
+                },
+                "topics": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of challenge topics that are displayed to the administrators for maintenance and planification.\n"
+                },
+                "until": {
+                    "type": "string",
+                    "description": "The date until the instance could run before being janitored.\n"
+                },
+                "value": {
+                    "type": "integer",
+                    "description": "The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.\n"
+                }
+            },
+            "requiredInputs": [
+                "category",
+                "decay",
+                "description",
+                "minimum",
+                "scenarioId",
+                "value"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ChallengeDynamicIaC resources.\n",
+                "properties": {
+                    "attribution": {
+                        "type": "string",
+                        "description": "Attribution to the creator(s) of the challenge.\n"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Category of the challenge that CTFd groups by on the web UI.\n"
+                    },
+                    "connectionInfo": {
+                        "type": "string",
+                        "description": "Connection Information to connect to the challenge instance, useful for pwn, web and infrastructure pentests.\n"
+                    },
+                    "decay": {
+                        "type": "integer",
+                        "description": "The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the challenge, consider using multiline descriptions for better style.\n"
+                    },
+                    "destroyOnFlag": {
+                        "type": "boolean",
+                        "description": "Whether to destroy the instance once flagged.\n"
+                    },
+                    "function": {
+                        "type": "string",
+                        "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
+                    },
+                    "manaCost": {
+                        "type": "integer",
+                        "description": "The cost (in mana) of the challenge once an instance is deployed.\n"
+                    },
+                    "maxAttempts": {
+                        "type": "integer",
+                        "description": "Maximum amount of attempts before being unable to flag the challenge.\n"
+                    },
+                    "minimum": {
+                        "type": "integer",
+                        "description": "The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the challenge, displayed as it.\n"
+                    },
+                    "next": {
+                        "type": "integer",
+                        "description": "Suggestion for the end-user as next challenge to work on.\n"
+                    },
+                    "requirements": {
+                        "$ref": "#/types/ctfdcm:index/ChallengeDynamicIaCRequirements:ChallengeDynamicIaCRequirements",
+                        "description": "List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.\n"
+                    },
+                    "scenarioId": {
+                        "type": "string",
+                        "description": "The file's ID of the scenario.\n"
+                    },
+                    "shared": {
+                        "type": "boolean",
+                        "description": "Whether the instance will be shared between all players.\n"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State of the challenge, either hidden or visible.\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.\n"
+                    },
+                    "timeout": {
+                        "type": "integer",
+                        "description": "The timeout (in seconds) after which the instance will be janitored.\n"
+                    },
+                    "topics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of challenge topics that are displayed to the administrators for maintenance and planification.\n"
+                    },
+                    "until": {
+                        "type": "string",
+                        "description": "The date until the instance could run before being janitored.\n"
+                    },
+                    "value": {
+                        "type": "integer",
+                        "description": "The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

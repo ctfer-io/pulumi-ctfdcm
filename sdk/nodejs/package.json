@@ -1,13 +1,15 @@
 {
-    "name": "@pulumi/xyz",
+    "name": "@pulumi/ctfdcm",
     "version": "1.0.0-alpha.0+dev",
-    "description": "A Pulumi package for creating and managing xyz cloud resources.",
+    "description": "The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code.",
     "keywords": [
-        "xyz",
-        "category/cloud"
+        "pulumi",
+        "ctfd",
+        "chall-manager",
+        "category/utility"
     ],
-    "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-xyz",
+    "homepage": "https://ctfer.io",
+    "repository": "https://github.com/ctfer-io/pulumi-ctfdcm",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc"
@@ -21,7 +23,8 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "xyz",
-        "version": "1.0.0-alpha.0+dev"
+        "name": "ctfdcm",
+        "version": "1.0.0-alpha.0+dev",
+        "server": "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/"
     }
 }

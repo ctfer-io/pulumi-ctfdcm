@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/examples
+module github.com/ctfer-io/pulumi-ctfdcm/examples
 
 go 1.22
 

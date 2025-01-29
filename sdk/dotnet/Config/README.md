@@ -1,1 +1,1 @@
-A Pulumi package for creating and managing xyz cloud resources.
+The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code.

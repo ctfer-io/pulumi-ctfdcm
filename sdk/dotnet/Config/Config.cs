@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Ctfdcm
 {
     public static class Config
     {
@@ -30,16 +30,48 @@ namespace Pulumi.Xyz
             }
         }
 
-        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("xyz");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("ctfdcm");
 
-        private static readonly __Value<Pulumi.Xyz.Region.Region?> _region = new __Value<Pulumi.Xyz.Region.Region?>(() => __config.GetObject<Pulumi.Xyz.Region.Region>("region"));
+        private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
         /// <summary>
-        /// A region which should be used.
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
+        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
+        /// policy.
         /// </summary>
-        public static Pulumi.Xyz.Region.Region? Region
+        public static string? ApiKey
         {
-            get => _region.Get();
-            set => _region.Set(value);
+            get => _apiKey.Get();
+            set => _apiKey.Set(value);
+        }
+
+        private static readonly __Value<string?> _nonce = new __Value<string?>(() => __config.Get("nonce"));
+        /// <summary>
+        /// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+        /// </summary>
+        public static string? Nonce
+        {
+            get => _nonce.Get();
+            set => _nonce.Set(value);
+        }
+
+        private static readonly __Value<string?> _session = new __Value<string?>(() => __config.Get("session"));
+        /// <summary>
+        /// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
+        /// </summary>
+        public static string? Session
+        {
+            get => _session.Get();
+            set => _session.Set(value);
+        }
+
+        private static readonly __Value<string?> _url = new __Value<string?>(() => __config.Get("url"));
+        /// <summary>
+        /// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
+        /// </summary>
+        public static string? Url
+        {
+            get => _url.Get();
+            set => _url.Set(value);
         }
 
     }
