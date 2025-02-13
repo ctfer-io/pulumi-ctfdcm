@@ -321,7 +321,7 @@ def deprecated(message: str) -> typing.Callable[[C], C]:
     return decorator
 
 def get_plugin_download_url():
-	return "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/"
+	return "github://api.github.com/ctfer-io/"
 
 def get_version():
      return _version_str

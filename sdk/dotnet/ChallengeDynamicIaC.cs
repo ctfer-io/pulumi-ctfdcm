@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Ctfdcm
+namespace CTFerio.Ctfdcm
 {
     /// <summary>
     /// CTFd is built around the Challenge resource, which contains all the attributes to define a part of the Capture The Flag event.
@@ -166,7 +167,7 @@ namespace Pulumi.Ctfdcm
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/",
+                PluginDownloadURL = "github://api.github.com/ctfer-io/",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

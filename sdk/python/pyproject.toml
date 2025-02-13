@@ -1,5 +1,5 @@
 [project]
-  name = "pulumi_ctfdcm"
+  name = "ctferio_ctfdcm"
   description = "The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code."
   dependencies = ["parver>=0.2.1", "pulumi>=3.142.0,<4.0.0", "semver>=2.8.1", "typing-extensions>=4.11; python_version < \"3.11\""]
   keywords = ["pulumi", "ctfd", "chall-manager", "category/utility"]
@@ -19,4 +19,4 @@
 [tool]
   [tool.setuptools]
     [tool.setuptools.package-data]
-      pulumi_ctfdcm = ["py.typed", "pulumi-plugin.json"]
+      ctferio_ctfdcm = ["py.typed", "pulumi-plugin.json"]

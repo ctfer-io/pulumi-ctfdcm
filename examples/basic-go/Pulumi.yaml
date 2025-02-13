@@ -1,0 +1,3 @@
+name: dyn
+runtime: go
+description: DynamicIaC test

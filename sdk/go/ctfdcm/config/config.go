@@ -18,17 +18,19 @@ func GetApiKey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:apiKey")
 }
 
-// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
-func GetNonce(ctx *pulumi.Context) string {
-	return config.Get(ctx, "ctfdcm:nonce")
-}
-
-// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
-func GetSession(ctx *pulumi.Context) string {
-	return config.Get(ctx, "ctfdcm:session")
+// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
+// instead.
+func GetPassword(ctx *pulumi.Context) string {
+	return config.Get(ctx, "ctfdcm:password")
 }
 
 // CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
 func GetUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:url")
+}
+
+// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
+// instead.
+func GetUsername(ctx *pulumi.Context) string {
+	return config.Get(ctx, "ctfdcm:username")
 }

@@ -1,6 +1,0 @@
-{
-  "resource": true,
-  "name": "ctfdcm",
-  "version": "1.0.0-alpha.0+dev",
-  "server": "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/"
-}

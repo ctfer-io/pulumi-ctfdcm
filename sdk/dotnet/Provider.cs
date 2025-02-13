@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Ctfdcm
+namespace CTFerio.Ctfdcm
 {
     /// <summary>
     /// The provider type for the ctfdcm package. By default, resources use package-wide configuration
@@ -27,22 +28,24 @@ namespace Pulumi.Ctfdcm
         public Output<string?> ApiKey { get; private set; } = null!;
 
         /// <summary>
-        /// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
+        /// instead.
         /// </summary>
-        [Output("nonce")]
-        public Output<string?> Nonce { get; private set; } = null!;
-
-        /// <summary>
-        /// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
-        /// </summary>
-        [Output("session")]
-        public Output<string?> Session { get; private set; } = null!;
+        [Output("password")]
+        public Output<string?> Password { get; private set; } = null!;
 
         /// <summary>
         /// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
         /// </summary>
         [Output("url")]
         public Output<string?> Url { get; private set; } = null!;
+
+        /// <summary>
+        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
+        /// instead.
+        /// </summary>
+        [Output("username")]
+        public Output<string?> Username { get; private set; } = null!;
 
 
         /// <summary>
@@ -62,12 +65,12 @@ namespace Pulumi.Ctfdcm
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/",
+                PluginDownloadURL = "github://api.github.com/ctfer-io/",
                 AdditionalSecretOutputs =
                 {
                     "apiKey",
-                    "nonce",
-                    "session",
+                    "password",
+                    "username",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -97,35 +100,20 @@ namespace Pulumi.Ctfdcm
             }
         }
 
-        [Input("nonce")]
-        private Input<string>? _nonce;
+        [Input("password")]
+        private Input<string>? _password;
 
         /// <summary>
-        /// User session nonce, comes with session. Could use `CTFD_NONCE` environment variable instead.
+        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
+        /// instead.
         /// </summary>
-        public Input<string>? Nonce
+        public Input<string>? Password
         {
-            get => _nonce;
+            get => _password;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _nonce = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
-        }
-
-        [Input("session")]
-        private Input<string>? _session;
-
-        /// <summary>
-        /// User session token, comes with nonce. Could use `CTFD_SESSION` environment variable instead.
-        /// </summary>
-        public Input<string>? Session
-        {
-            get => _session;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _session = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 
@@ -134,6 +122,23 @@ namespace Pulumi.Ctfdcm
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }
+
+        [Input("username")]
+        private Input<string>? _username;
+
+        /// <summary>
+        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
+        /// instead.
+        /// </summary>
+        public Input<string>? Username
+        {
+            get => _username;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _username = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ProviderArgs()
         {

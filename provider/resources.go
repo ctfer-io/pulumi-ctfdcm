@@ -47,14 +47,13 @@ func Provider() tfbridge.ProviderInfo {
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		//nolint:lll
-		P: pfbridge.ShimProvider(ctfdcm.New(version.Version)()),
-
+		P:                 pfbridge.ShimProvider(ctfdcm.New(version.Version)()),
 		Name:              "ctfdcm",
 		Version:           version.Version,
 		DisplayName:       "CTFd-Chall-Manager",
 		Publisher:         "CTFer.io",
 		LogoURL:           "https://raw.githubusercontent.com/ctfer-io/pulumi-ctfdcm/main/res/logo.png",
-		PluginDownloadURL: "https://github.com/ctfer-io/pulumi-ctfdcm/releases/download/v${VERSION}/",
+		PluginDownloadURL: "github://api.github.com/ctfer-io/",
 		Description:       "The CTFd-Chall-Manager provider for Pulumi, to manage its resources as code.",
 		Keywords:          []string{"pulumi", "ctfd", "chall-manager", "category/utility"},
 		License:           "Apache-2.0",
@@ -69,10 +68,12 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@ctfer-io/pulumi-ctfdcm",
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
+			PackageName: "ctferio_ctfdcm",
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
 			RespectSchemaVersion: true,
 			// Enable modern PyProject support in the generated Python SDK.
@@ -95,6 +96,7 @@ func Provider() tfbridge.ProviderInfo {
 		CSharp: &tfbridge.CSharpInfo{
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
 			RespectSchemaVersion: true,
+			RootNamespace:        "CTFerio",
 			// Use a wildcard import so NuGet will prefer the latest possible version.
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",

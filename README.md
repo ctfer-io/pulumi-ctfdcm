@@ -1,55 +1,17 @@
-# CTFd-CM Resource Provider
+<div align="center">
+    <h1>Pulumi CTFd-CM Provider</h1>
+    <p><b>Let's code your CTF(d), with <a href="https://github.com/ctfer-io/ctfd-chall-manager">Chall-Manager</a></b><p>
+    <a href="https://pkg.go.dev/github.com/ctfer-io/pulumi-ctfdcm"><img src="https://shields.io/badge/-reference-blue?logo=go&style=for-the-badge" alt="reference"></a>
+    <a href=""><img src="https://img.shields.io/github/license/ctfer-io/pulumi-ctfdcm?style=for-the-badge" alt="License"></a>
+	<br>
+	<a href="https://github.com/ctfer-io/pulumi-ctfdcm/actions/workflows/codeql-analysis.yaml"><img src="https://img.shields.io/github/actions/workflow/status/ctfer-io/pulumi-ctfdcm/codeql-analysis.yaml?style=for-the-badge&label=CodeQL" alt="CodeQL"></a>
+    <a href="https://securityscorecards.dev/viewer/?uri=github.com/ctfer-io/pulumi-ctfdcm"><img src="https://img.shields.io/ossf-scorecard/github.com/ctfer-io/pulumi-ctfdcm?label=openssf%20scorecard&style=for-the-badge" alt="OpenSSF Scoreboard"></a>
+</div>
 
 The CTFd-CM Resource Provider lets you manage [CTFd plugin for Chall-Manager](http://github.com/ctfer-io/ctfd-chall-manager) resources.
 
-## Installing
+## SDK
 
-This package is available for several languages/platforms:
+To install the provider, refer to [this documentation](https://github.com/ctfer-io/pulumi-ctfdcm/blob/main/docs/installation-configuration.md).
 
-### Node.js (JavaScript/TypeScript)
-
-To use from JavaScript or TypeScript in Node.js, install using either `npm`:
-
-```bash
-npm install @ctfer-io/ctfdcm
-```
-
-or `yarn`:
-
-```bash
-yarn add @ctfer-io/ctfdcm
-```
-
-### Python
-
-To use from Python, install using `pip`:
-
-```bash
-pip install ctfer-io-pulumi-ctfdcm
-```
-
-### Go
-
-To use from Go, use `go get` to grab the latest version of the library:
-
-```bash
-go get github.com/ctfer-io/pulumi-ctfdcm/sdk/go/...
-```
-
-### .NET
-
-To use from .NET, install using `dotnet add package`:
-
-```bash
-dotnet add package CTFerio.Ctfdcm
-```
-
-## Configuration
-
-The following configuration points are available for the `ctfdcm` provider:
-
-- `ctfdcm:region` (environment: `CTFDCM_REGION`) - the region in which to deploy resources
-
-## Reference
-
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/ctfdcm/api-docs/).
+For more information on how to use the SDK in your favorite language, refer to [this documentation](https://github.com/ctfer-io/pulumi-ctfdcm/blob/main/docs/_index.md).

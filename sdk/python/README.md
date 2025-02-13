@@ -25,7 +25,7 @@ yarn add @ctfer-io/ctfdcm
 To use from Python, install using `pip`:
 
 ```bash
-pip install ctfer-io-pulumi-ctfdcm
+pip install ctferio-ctfdcm
 ```
 
 ### Go

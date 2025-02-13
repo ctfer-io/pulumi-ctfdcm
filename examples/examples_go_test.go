@@ -3,3 +3,23 @@
 // +build go all
 
 package examples
+
+import (
+	"path/filepath"
+	"testing"
+
+	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
+)
+
+func Test_I_Go(t *testing.T) {
+	opts := getGoBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "basic-go"),
+		// The ctfd.File resource is created on the fly thus cannot be guaranteed
+		// to keep the same hash... It may be improved in the future to remove this
+		// technical debt.
+		// TODO improve ctfd_file stability in terraform-provider-ctfd
+		AllowEmptyPreviewChanges: true,
+		AllowEmptyUpdateChanges:  true,
+	})
+	integration.ProgramTest(t, &opts)
+}
