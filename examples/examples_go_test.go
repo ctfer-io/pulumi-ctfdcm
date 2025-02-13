@@ -5,6 +5,8 @@
 package examples
 
 import (
+	"fmt"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -20,6 +22,9 @@ func Test_I_Go(t *testing.T) {
 		// TODO improve ctfd_file stability in terraform-provider-ctfd
 		AllowEmptyPreviewChanges: true,
 		AllowEmptyUpdateChanges:  true,
+		Env: []string{
+			fmt.Sprintf("CTFD_URL=%s", os.Getenv("CTFD_URL")),
+		},
 	})
 	integration.ProgramTest(t, &opts)
 }
