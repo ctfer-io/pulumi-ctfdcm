@@ -19,7 +19,7 @@ builds:
       - windows
       - linux
     ldflags:
-      - -X github.com/ctfer-io/pulumi-ctfdcm/provider/v2/pkg/version.Version={{.Tag }}
+      - -X github.com/ctfer-io/pulumi-ctfdcm/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-ctfdcm/
 
 changelog:
