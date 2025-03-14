@@ -1,24 +1,24 @@
 ---
-title: CTFd Installation & Configuration
-meta_desc: Provides an overview on how to setup the CTFd Provider for Pulumi.
+title: CTFd-CM Installation & Configuration
+meta_desc: Provides an overview on how to setup the CTFd-CM Provider for Pulumi.
 layout: package
 ---
 
 ## Installation
 
-The CTFd provider is available as a package in all Pulumi languages:
+The CTFd-CM provider is available as a package in all Pulumi languages:
 
-- JavaScript/TypeScript: [`@ctfer-io/pulumi-ctfd`](https://www.npmjs.com/package/@ctfer-io/pulumi-ctfd)
-- Python: [`ctfer-io_pulumi-ctfd`](https://pypi.org/project/ctfer-io_pulumi-ctfd/)
-- Golang: [`github.com/ctfer-io/pulumi-ctfd/sdk/v2/go/ctfd`](https://github.com/ctfer-io/pulumi-ctfd)
-- .NET: [`CTFerio.Ctfd`](https://www.nuget.org/packages/CTFerio.Ctfd)
+- JavaScript/TypeScript: [`@ctfer-io/pulumi-ctfdcm`](https://www.npmjs.com/package/@ctfer-io/pulumi-ctfdcm)
+- Python: [`ctfer-io_pulumi-ctfdcm`](https://pypi.org/project/ctfer-io_pulumi-ctfdcm/)
+- Golang: [`github.com/ctfer-io/pulumi-ctfdcm/sdk/go/ctfdcm`](https://github.com/ctfer-io/pulumi-ctfdcm)
+- .NET: [`CTFerio.Ctfdcm`](https://www.nuget.org/packages/CTFerio.Ctfdcm)
 
 ## Provider Binary
 
-The CTFd provider binary is a third party binary. It can be installed using the pulumi plugin command.
+The CTFd-CM provider binary is a third party binary. It can be installed using the pulumi plugin command.
 
 ```bash
-pulumi plugin install resource ctfd <version> --server github://api.github.com/ctfer-io
+pulumi plugin install resource ctfdcm <version> --server github://api.github.com/ctfer-io
 ```
 
 Replace the version string with your desired version.
@@ -26,7 +26,7 @@ Replace the version string with your desired version.
 ## Configuration
 
 Pulumi relies on the CTFd REST JSON API to authenticate requests from the host machine to CTFd. Your credentials are never sent to pulumi.com.
-The Pulumi CTFd Provider needs to be configured with CTFd credentials before it can be used to manage resources.
+The Pulumi CTFd-CM Provider needs to be configured with CTFd credentials before it can be used to manage resources.
 
 Your can either configure it using:
 
@@ -55,7 +55,7 @@ For instance, you can set the url using `pulumi config set url https://my-ctf.la
 package main
 
 import (
-    "github.com/ctfer-io/pulumi-ctfd/sdk/v2/go/ctfd"
+    "github.com/ctfer-io/pulumi-ctfdcm/sdk/go/ctfdcm"
     "github.com/pulumi/pulumi/sdk/v3/go/pulumi"
     "github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
@@ -65,7 +65,7 @@ func main() {
         conf := config.New(ctx, "prod")
 
         // Create provider
-        _, err := ctfd.NewProvider(ctx, "ctfd-fine-grained", &ctfd.ProviderArgs{
+        _, err := ctfdcm.NewProvider(ctx, "ctfd-fine-grained", &ctfdcm.ProviderArgs{
             Url:    pulumi.String(conf.Get("url")),
             ApiKey: conf.GetSecret("api_key"),
         })
