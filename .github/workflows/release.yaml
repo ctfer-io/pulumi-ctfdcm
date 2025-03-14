@@ -1,0 +1,186 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish_provider:
+    runs-on: ubuntu-latest
+    name: Publish Provider
+    outputs:
+      hashes: ${{ steps.hash.outputs.hashes }}
+    permissions:
+      contents: write  # for goreleaser/goreleaser-action to create a GitHub release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          # Allow goreleaser to access older tag information.
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5.3.0
+        with:
+          go-version-file: 'provider/go.mod'
+
+      - name: Install Syft
+        uses: anchore/sbom-action/download-syft@f325610c9f50a54015d37c8d16cb3b0e2c8f4de0 # v0.18.0
+
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b # v1.14.0
+        with:
+          repo: pulumi/pulumictl
+
+      - name: Set PreRelease Version
+        run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
+
+      - name: Run GoReleaser
+        id: run-goreleaser
+        uses: goreleaser/goreleaser-action@90a3faa9d0182683851fbfa97ca1a2cb983bfca3 # v6.2.1
+        with:
+          args: -p 3 release --clean --timeout 60m0s
+          version: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate subject
+        id: hash
+        env:
+          ARTIFACTS: "${{ steps.run-goreleaser.outputs.artifacts }}"
+        run: |
+          set -euo pipefail
+
+          checksum_file=$(echo "$ARTIFACTS" | jq -r '.[] | select (.type=="Checksum") | .path')
+          echo "hashes=$(cat $checksum_file | base64 -w0)" >> "$GITHUB_OUTPUT"
+
+  provenance:
+    needs: [publish_provider]
+    permissions:
+      actions: read # To read the workflow path.
+      id-token: write # To sign the provenance.
+      contents: write # To add assets to a release.
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0 # not pinned to avoid breaking it, use it to target refs/tags/vX.Y.Z
+    with:
+      base64-subjects: "${{ needs.publish_provider.outputs.hashes }}"
+      upload-assets: true # upload to a new release
+
+  publish_sdk:
+    runs-on: ubuntu-latest
+    name: Publish SDK
+    permissions:
+      id-token: write
+      contents: read
+    needs: [publish_provider]
+    strategy:
+      max-parallel: 10
+      matrix:
+        node-version: [20.x]
+        dotnet-version: [6.0.x]
+        python-version: [3.11]
+        language:
+          - go
+          - nodejs
+          - python
+          - dotnet
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5.3.0
+        with:
+          go-version-file: 'provider/go.mod'
+          cache: true
+
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b # v1.14.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@9519177da243fd32cab35cdbf19cce1ab7472fcc # v6.2.0
+
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@3951f0dfe7a07e2313ec93c75700083e2005cbab # v4.3.0
+        with:
+          dotnet-version: "${{ matrix.dotnet-version }}"
+        if: matrix.language == 'dotnet'
+      - name: Setup Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "${{ matrix.python-version }}"
+        if: matrix.language == 'python'
+      - name: Use Node.js
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        with:
+          node-version: "${{ matrix.node-version }}"
+        if: matrix.language == 'nodejs'
+
+      - name: Install Plugins
+        run: make install_plugins
+      - name: Update Path
+        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+
+      - name: Build SDK
+        run: make build_${{ matrix.language }}
+
+      - name: Publish .NET SDK
+        run: |
+          dotnet nuget push -s "${{ env.NUGET_FEED_URL }}" -k "${{ secrets.NUGET_PUBLISH_KEY }}" ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg
+        env:
+          NUGET_PUBLISH_KEY: ${{ secrets.NUGET_TOKEN }}
+          NUGET_FEED_URL: https://api.nuget.org/v3/index.json
+        if: matrix.language == 'dotnet'
+
+      - name: Publish Python SDK
+        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc # v1.12.4
+        with:
+          skip-existing: true
+          packages-dir: "${{ github.workspace }}/sdk/python/bin/dist/"
+        if: matrix.language == 'python'
+
+      - name: Publish NodeJS SDK
+        uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c # v3.1.1
+        with:
+          package: ./sdk/nodejs/bin/package.json
+          access: public
+          token: ${{ secrets.NPM_TOKEN }}
+          provenance: true
+        if: matrix.language == 'nodejs'
+
+  tag_sdk:
+    runs-on: ubuntu-latest
+    name: Tag SDK Release
+    permissions:
+      id-token: write
+      contents: write
+    needs:
+      - publish_sdk
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Setup Git
+        run: |
+          git config --local user.email "ctfer-io@protonmail.com"
+          git config --local user.name "ctfer-io[bot]"
+
+      - name: Get Tag Name
+        run: |
+          REF_NAME=`git describe --abbrev=0 --tags`
+          echo "REF_NAME=${REF_NAME}" >> $GITHUB_ENV
+
+      - name: Tag SDK Version
+        run: |
+          git tag -a sdk/${{ env.REF_NAME }} -m sdk/${{ env.REF_NAME }}
+      - name: Push to Repository
+        run: |
+          git push origin sdk/${{ env.REF_NAME }}
