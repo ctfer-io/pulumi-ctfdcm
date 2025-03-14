@@ -2,8 +2,6 @@ module github.com/ctfer-io/pulumi-ctfdcm/provider
 
 go 1.23.4
 
-toolchain go1.24.1
-
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240202163305-e2a20ae13ef9
 
 require (
