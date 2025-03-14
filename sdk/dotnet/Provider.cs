@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace CTFerio.Ctfd
+namespace CTFerio.Ctfdcm
 {
     /// <summary>
-    /// The provider type for the ctfd package. By default, resources use package-wide configuration
+    /// The provider type for the ctfdcm package. By default, resources use package-wide configuration
     /// settings, however an explicit `Provider` instance may be created and passed during resource
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
-    [CtfdResourceType("pulumi:providers:ctfd")]
+    [CtfdcmResourceType("pulumi:providers:ctfdcm")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
@@ -56,7 +56,7 @@ namespace CTFerio.Ctfd
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
-            : base("ctfd", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+            : base("ctfdcm", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 

@@ -13,24 +13,14 @@
         "strict": true
     },
     "files": [
-        "challengeDynamic.ts",
-        "challengeStandard.ts",
+        "challengeDynamicIaC.ts",
         "config/index.ts",
         "config/vars.ts",
-        "file.ts",
-        "flag.ts",
-        "getChallengesDynamic.ts",
-        "getChallengesStandard.ts",
-        "getTeams.ts",
-        "getUsers.ts",
-        "hint.ts",
         "index.ts",
         "provider.ts",
-        "team.ts",
         "types/index.ts",
         "types/input.ts",
         "types/output.ts",
-        "user.ts",
         "utilities.ts"
     ]
 }

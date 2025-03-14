@@ -1,0 +1,53 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "ctfdcm_challenge_dynamiciac": {
+                "current": "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC",
+                "fields": {
+                    "requirements": {
+                        "fields": {
+                            "prerequisites": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "topics": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {},
+    "renames": {
+        "resources": {
+            "ctfd:index/challenge:Challenge": "ctfd_challenge",
+            "ctfd:index/team:Team": "ctfd_team",
+            "ctfd:index/user:User": "ctfd_user"
+        },
+        "functions": {
+            "ctfd:index/getChallenges:getChallenges": "ctfd_challenges",
+            "ctfd:index/getTeams:getTeams": "ctfd_teams",
+            "ctfd:index/getUsers:getUsers": "ctfd_users"
+        },
+        "renamedProperties": {
+            "ctfd:index/challenge:Challenge": {
+                "connectionInfo": "connection_info",
+                "maxAttempts": "max_attempts"
+            },
+            "ctfd:index/getChallengesChallenge:getChallengesChallenge": {
+                "connectionInfo": "connection_info",
+                "maxAttempts": "max_attempts"
+            },
+            "ctfd:index:Provider": {
+                "apiKey": "api_key"
+            }
+        },
+        "renamedConfigProperties": {
+            "apiKey": "api_key"
+        }
+    }
+}

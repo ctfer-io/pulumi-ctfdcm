@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace CTFerio.Ctfd
+namespace CTFerio.Ctfdcm
 {
     public static class Config
     {
@@ -30,7 +30,7 @@ namespace CTFerio.Ctfd
             }
         }
 
-        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("ctfd");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("ctfdcm");
 
         private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
         /// <summary>

@@ -14,24 +14,24 @@ def readme():
         with open('README.md', encoding='utf-8') as f:
             return f.read()
     except FileNotFoundError:
-        return "ctfd Pulumi Package - Development Version"
+        return "ctfdcm Pulumi Package - Development Version"
 
 
-setup(name='ctfer-io_pulumi-ctfd',
+setup(name='ctfer-io_pulumi-ctfdcm',
       python_requires='>=3.9',
       version=VERSION,
-      description="The CTFd provider for Pulumi, to manage its resources as code.",
+      description="The CTFd-CM provider for Pulumi, to manage its resources as code.",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      keywords='pulumi ctfd category/cloud',
+      keywords='pulumi ctfd chall-manager category/cloud',
       url='https://ctfer.io',
       project_urls={
-          'Repository': 'https://github.com/ctfer-io/pulumi-ctfd'
+          'Repository': 'https://github.com/ctfer-io/pulumi-ctfdcm'
       },
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'ctfer-io_pulumi-ctfd': [
+          'ctfer-io_pulumi-ctfdcm': [
               'py.typed',
               'pulumi-plugin.json',
           ]
