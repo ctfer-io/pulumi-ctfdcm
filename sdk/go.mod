@@ -1,10 +1,9 @@
 module github.com/ctfer-io/pulumi-ctfdcm/sdk
 
 go 1.24.1
-
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/pulumi/pulumi/sdk/v3 v3.157.0
+	github.com/pulumi/pulumi/sdk/v3 v3.159.0
 )
 
 require (
