@@ -1,5 +1,5 @@
 <div align="center">
-    <h1><img src="res/ctfd.png">Pulumi CTFd-CM Provider</h1>
+    <h1>Pulumi CTFd-CM Provider</h1>
     <p><b>Let's code your CTF(d), with <a href="https://github.com/ctfer-io/ctfd-chall-manager">Chall-Manager</a></b><p>
     <a href="https://pkg.go.dev/github.com/ctfer-io/pulumi-ctfdcm"><img src="https://shields.io/badge/-reference-blue?logo=go&style=for-the-badge" alt="reference"></a>
     <a href=""><img src="https://img.shields.io/github/license/ctfer-io/pulumi-ctfdcm?style=for-the-badge" alt="License"></a>

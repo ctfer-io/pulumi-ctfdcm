@@ -14,7 +14,7 @@ import (
 
 // CTFd is built around the Challenge resource, which contains all the attributes to define a part of the Capture The Flag event.
 //
-// This implementation has support of a more dynamic behavior for its scoring through time/solves thus is different from a standard challenge.
+// This implementation has support of On Demand infrastructures through [Chall-Manager](https://github.com/ctfer-io/chall-manager).
 //
 // ## Example Usage
 //
@@ -87,6 +87,8 @@ import (
 type ChallengeDynamicIaC struct {
 	pulumi.CustomResourceState
 
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional pulumi.StringMapOutput `pulumi:"additional"`
 	// Attribution to the creator(s) of the challenge.
 	Attribution pulumi.StringPtrOutput `pulumi:"attribution"`
 	// Category of the challenge that CTFd groups by on the web UI.
@@ -103,8 +105,12 @@ type ChallengeDynamicIaC struct {
 	Function pulumi.StringOutput `pulumi:"function"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntOutput `pulumi:"manaCost"`
+	// The number of instances after which not to pool anymore.
+	Max pulumi.IntOutput `pulumi:"max"`
 	// Maximum amount of attempts before being unable to flag the challenge.
 	MaxAttempts pulumi.IntOutput `pulumi:"maxAttempts"`
+	// The minimum number of instances to set in the pool.
+	Min pulumi.IntOutput `pulumi:"min"`
 	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
 	Minimum pulumi.IntOutput `pulumi:"minimum"`
 	// Name of the challenge, displayed as it.
@@ -179,6 +185,8 @@ func GetChallengeDynamicIaC(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ChallengeDynamicIaC resources.
 type challengeDynamicIaCState struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional map[string]string `pulumi:"additional"`
 	// Attribution to the creator(s) of the challenge.
 	Attribution *string `pulumi:"attribution"`
 	// Category of the challenge that CTFd groups by on the web UI.
@@ -195,8 +203,12 @@ type challengeDynamicIaCState struct {
 	Function *string `pulumi:"function"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost *int `pulumi:"manaCost"`
+	// The number of instances after which not to pool anymore.
+	Max *int `pulumi:"max"`
 	// Maximum amount of attempts before being unable to flag the challenge.
 	MaxAttempts *int `pulumi:"maxAttempts"`
+	// The minimum number of instances to set in the pool.
+	Min *int `pulumi:"min"`
 	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
 	Minimum *int `pulumi:"minimum"`
 	// Name of the challenge, displayed as it.
@@ -224,6 +236,8 @@ type challengeDynamicIaCState struct {
 }
 
 type ChallengeDynamicIaCState struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional pulumi.StringMapInput
 	// Attribution to the creator(s) of the challenge.
 	Attribution pulumi.StringPtrInput
 	// Category of the challenge that CTFd groups by on the web UI.
@@ -240,8 +254,12 @@ type ChallengeDynamicIaCState struct {
 	Function pulumi.StringPtrInput
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntPtrInput
+	// The number of instances after which not to pool anymore.
+	Max pulumi.IntPtrInput
 	// Maximum amount of attempts before being unable to flag the challenge.
 	MaxAttempts pulumi.IntPtrInput
+	// The minimum number of instances to set in the pool.
+	Min pulumi.IntPtrInput
 	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
 	Minimum pulumi.IntPtrInput
 	// Name of the challenge, displayed as it.
@@ -273,6 +291,8 @@ func (ChallengeDynamicIaCState) ElementType() reflect.Type {
 }
 
 type challengeDynamicIaCArgs struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional map[string]string `pulumi:"additional"`
 	// Attribution to the creator(s) of the challenge.
 	Attribution *string `pulumi:"attribution"`
 	// Category of the challenge that CTFd groups by on the web UI.
@@ -289,8 +309,12 @@ type challengeDynamicIaCArgs struct {
 	Function *string `pulumi:"function"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost *int `pulumi:"manaCost"`
+	// The number of instances after which not to pool anymore.
+	Max *int `pulumi:"max"`
 	// Maximum amount of attempts before being unable to flag the challenge.
 	MaxAttempts *int `pulumi:"maxAttempts"`
+	// The minimum number of instances to set in the pool.
+	Min *int `pulumi:"min"`
 	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
 	Minimum int `pulumi:"minimum"`
 	// Name of the challenge, displayed as it.
@@ -319,6 +343,8 @@ type challengeDynamicIaCArgs struct {
 
 // The set of arguments for constructing a ChallengeDynamicIaC resource.
 type ChallengeDynamicIaCArgs struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional pulumi.StringMapInput
 	// Attribution to the creator(s) of the challenge.
 	Attribution pulumi.StringPtrInput
 	// Category of the challenge that CTFd groups by on the web UI.
@@ -335,8 +361,12 @@ type ChallengeDynamicIaCArgs struct {
 	Function pulumi.StringPtrInput
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntPtrInput
+	// The number of instances after which not to pool anymore.
+	Max pulumi.IntPtrInput
 	// Maximum amount of attempts before being unable to flag the challenge.
 	MaxAttempts pulumi.IntPtrInput
+	// The minimum number of instances to set in the pool.
+	Min pulumi.IntPtrInput
 	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
 	Minimum pulumi.IntInput
 	// Name of the challenge, displayed as it.
@@ -450,6 +480,11 @@ func (o ChallengeDynamicIaCOutput) ToChallengeDynamicIaCOutputWithContext(ctx co
 	return o
 }
 
+// An optional key=value map (both strings) to pass to the scenario.
+func (o ChallengeDynamicIaCOutput) Additional() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringMapOutput { return v.Additional }).(pulumi.StringMapOutput)
+}
+
 // Attribution to the creator(s) of the challenge.
 func (o ChallengeDynamicIaCOutput) Attribution() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringPtrOutput { return v.Attribution }).(pulumi.StringPtrOutput)
@@ -490,9 +525,19 @@ func (o ChallengeDynamicIaCOutput) ManaCost() pulumi.IntOutput {
 	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.ManaCost }).(pulumi.IntOutput)
 }
 
+// The number of instances after which not to pool anymore.
+func (o ChallengeDynamicIaCOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.Max }).(pulumi.IntOutput)
+}
+
 // Maximum amount of attempts before being unable to flag the challenge.
 func (o ChallengeDynamicIaCOutput) MaxAttempts() pulumi.IntOutput {
 	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.MaxAttempts }).(pulumi.IntOutput)
+}
+
+// The minimum number of instances to set in the pool.
+func (o ChallengeDynamicIaCOutput) Min() pulumi.IntOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.Min }).(pulumi.IntOutput)
 }
 
 // The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.

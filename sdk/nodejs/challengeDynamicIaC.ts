@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
 /**
  * CTFd is built around the Challenge resource, which contains all the attributes to define a part of the Capture The Flag event.
  *
- * This implementation has support of a more dynamic behavior for its scoring through time/solves thus is different from a standard challenge.
+ * This implementation has support of On Demand infrastructures through [Chall-Manager](https://github.com/ctfer-io/chall-manager).
  *
  * ## Example Usage
  *
@@ -74,6 +74,10 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
     }
 
     /**
+     * An optional key=value map (both strings) to pass to the scenario.
+     */
+    public readonly additional!: pulumi.Output<{[key: string]: string}>;
+    /**
      * Attribution to the creator(s) of the challenge.
      */
     public readonly attribution!: pulumi.Output<string | undefined>;
@@ -106,9 +110,17 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
      */
     public readonly manaCost!: pulumi.Output<number>;
     /**
+     * The number of instances after which not to pool anymore.
+     */
+    public readonly max!: pulumi.Output<number>;
+    /**
      * Maximum amount of attempts before being unable to flag the challenge.
      */
     public readonly maxAttempts!: pulumi.Output<number>;
+    /**
+     * The minimum number of instances to set in the pool.
+     */
+    public readonly min!: pulumi.Output<number>;
     /**
      * The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
      */
@@ -171,6 +183,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ChallengeDynamicIaCState | undefined;
+            resourceInputs["additional"] = state ? state.additional : undefined;
             resourceInputs["attribution"] = state ? state.attribution : undefined;
             resourceInputs["category"] = state ? state.category : undefined;
             resourceInputs["connectionInfo"] = state ? state.connectionInfo : undefined;
@@ -179,7 +192,9 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
             resourceInputs["destroyOnFlag"] = state ? state.destroyOnFlag : undefined;
             resourceInputs["function"] = state ? state.function : undefined;
             resourceInputs["manaCost"] = state ? state.manaCost : undefined;
+            resourceInputs["max"] = state ? state.max : undefined;
             resourceInputs["maxAttempts"] = state ? state.maxAttempts : undefined;
+            resourceInputs["min"] = state ? state.min : undefined;
             resourceInputs["minimum"] = state ? state.minimum : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["next"] = state ? state.next : undefined;
@@ -212,6 +227,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
             if ((!args || args.value === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'value'");
             }
+            resourceInputs["additional"] = args ? args.additional : undefined;
             resourceInputs["attribution"] = args ? args.attribution : undefined;
             resourceInputs["category"] = args ? args.category : undefined;
             resourceInputs["connectionInfo"] = args ? args.connectionInfo : undefined;
@@ -220,7 +236,9 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
             resourceInputs["destroyOnFlag"] = args ? args.destroyOnFlag : undefined;
             resourceInputs["function"] = args ? args.function : undefined;
             resourceInputs["manaCost"] = args ? args.manaCost : undefined;
+            resourceInputs["max"] = args ? args.max : undefined;
             resourceInputs["maxAttempts"] = args ? args.maxAttempts : undefined;
+            resourceInputs["min"] = args ? args.min : undefined;
             resourceInputs["minimum"] = args ? args.minimum : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["next"] = args ? args.next : undefined;
@@ -243,6 +261,10 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ChallengeDynamicIaC resources.
  */
 export interface ChallengeDynamicIaCState {
+    /**
+     * An optional key=value map (both strings) to pass to the scenario.
+     */
+    additional?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Attribution to the creator(s) of the challenge.
      */
@@ -276,9 +298,17 @@ export interface ChallengeDynamicIaCState {
      */
     manaCost?: pulumi.Input<number>;
     /**
+     * The number of instances after which not to pool anymore.
+     */
+    max?: pulumi.Input<number>;
+    /**
      * Maximum amount of attempts before being unable to flag the challenge.
      */
     maxAttempts?: pulumi.Input<number>;
+    /**
+     * The minimum number of instances to set in the pool.
+     */
+    min?: pulumi.Input<number>;
     /**
      * The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
      */
@@ -334,6 +364,10 @@ export interface ChallengeDynamicIaCState {
  */
 export interface ChallengeDynamicIaCArgs {
     /**
+     * An optional key=value map (both strings) to pass to the scenario.
+     */
+    additional?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
      * Attribution to the creator(s) of the challenge.
      */
     attribution?: pulumi.Input<string>;
@@ -366,9 +400,17 @@ export interface ChallengeDynamicIaCArgs {
      */
     manaCost?: pulumi.Input<number>;
     /**
+     * The number of instances after which not to pool anymore.
+     */
+    max?: pulumi.Input<number>;
+    /**
      * Maximum amount of attempts before being unable to flag the challenge.
      */
     maxAttempts?: pulumi.Input<number>;
+    /**
+     * The minimum number of instances to set in the pool.
+     */
+    min?: pulumi.Input<number>;
     /**
      * The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
      */
