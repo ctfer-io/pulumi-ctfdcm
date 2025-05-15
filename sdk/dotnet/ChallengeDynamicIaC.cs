@@ -13,7 +13,7 @@ namespace CTFerio.Ctfdcm
     /// <summary>
     /// CTFd is built around the Challenge resource, which contains all the attributes to define a part of the Capture The Flag event.
     /// 
-    /// This implementation has support of a more dynamic behavior for its scoring through time/solves thus is different from a standard challenge.
+    /// This implementation has support of On Demand infrastructures through [Chall-Manager](https://github.com/ctfer-io/chall-manager).
     /// 
     /// ## Example Usage
     /// 
@@ -77,6 +77,12 @@ namespace CTFerio.Ctfdcm
     public partial class ChallengeDynamicIaC : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// An optional key=value map (both strings) to pass to the scenario.
+        /// </summary>
+        [Output("additional")]
+        public Output<ImmutableDictionary<string, string>> Additional { get; private set; } = null!;
+
+        /// <summary>
         /// Attribution to the creator(s) of the challenge.
         /// </summary>
         [Output("attribution")]
@@ -125,10 +131,22 @@ namespace CTFerio.Ctfdcm
         public Output<int> ManaCost { get; private set; } = null!;
 
         /// <summary>
+        /// The number of instances after which not to pool anymore.
+        /// </summary>
+        [Output("max")]
+        public Output<int> Max { get; private set; } = null!;
+
+        /// <summary>
         /// Maximum amount of attempts before being unable to flag the challenge.
         /// </summary>
         [Output("maxAttempts")]
         public Output<int> MaxAttempts { get; private set; } = null!;
+
+        /// <summary>
+        /// The minimum number of instances to set in the pool.
+        /// </summary>
+        [Output("min")]
+        public Output<int> Min { get; private set; } = null!;
 
         /// <summary>
         /// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
@@ -249,6 +267,18 @@ namespace CTFerio.Ctfdcm
 
     public sealed class ChallengeDynamicIaCArgs : global::Pulumi.ResourceArgs
     {
+        [Input("additional")]
+        private InputMap<string>? _additional;
+
+        /// <summary>
+        /// An optional key=value map (both strings) to pass to the scenario.
+        /// </summary>
+        public InputMap<string> Additional
+        {
+            get => _additional ?? (_additional = new InputMap<string>());
+            set => _additional = value;
+        }
+
         /// <summary>
         /// Attribution to the creator(s) of the challenge.
         /// </summary>
@@ -298,10 +328,22 @@ namespace CTFerio.Ctfdcm
         public Input<int>? ManaCost { get; set; }
 
         /// <summary>
+        /// The number of instances after which not to pool anymore.
+        /// </summary>
+        [Input("max")]
+        public Input<int>? Max { get; set; }
+
+        /// <summary>
         /// Maximum amount of attempts before being unable to flag the challenge.
         /// </summary>
         [Input("maxAttempts")]
         public Input<int>? MaxAttempts { get; set; }
+
+        /// <summary>
+        /// The minimum number of instances to set in the pool.
+        /// </summary>
+        [Input("min")]
+        public Input<int>? Min { get; set; }
 
         /// <summary>
         /// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
@@ -395,6 +437,18 @@ namespace CTFerio.Ctfdcm
 
     public sealed class ChallengeDynamicIaCState : global::Pulumi.ResourceArgs
     {
+        [Input("additional")]
+        private InputMap<string>? _additional;
+
+        /// <summary>
+        /// An optional key=value map (both strings) to pass to the scenario.
+        /// </summary>
+        public InputMap<string> Additional
+        {
+            get => _additional ?? (_additional = new InputMap<string>());
+            set => _additional = value;
+        }
+
         /// <summary>
         /// Attribution to the creator(s) of the challenge.
         /// </summary>
@@ -444,10 +498,22 @@ namespace CTFerio.Ctfdcm
         public Input<int>? ManaCost { get; set; }
 
         /// <summary>
+        /// The number of instances after which not to pool anymore.
+        /// </summary>
+        [Input("max")]
+        public Input<int>? Max { get; set; }
+
+        /// <summary>
         /// Maximum amount of attempts before being unable to flag the challenge.
         /// </summary>
         [Input("maxAttempts")]
         public Input<int>? MaxAttempts { get; set; }
+
+        /// <summary>
+        /// The minimum number of instances to set in the pool.
+        /// </summary>
+        [Input("min")]
+        public Input<int>? Min { get; set; }
 
         /// <summary>
         /// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.

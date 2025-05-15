@@ -10,10 +10,8 @@ export type ChallengeDynamicIaC = import("./challengeDynamicIaC").ChallengeDynam
 export const ChallengeDynamicIaC: typeof import("./challengeDynamicIaC").ChallengeDynamicIaC = null as any;
 utilities.lazyLoad(exports, ["ChallengeDynamicIaC"], () => require("./challengeDynamicIaC"));
 
-export { ProviderArgs } from "./provider";
-export type Provider = import("./provider").Provider;
-export const Provider: typeof import("./provider").Provider = null as any;
-utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+export * from "./provider";
+import { Provider } from "./provider";
 
 
 // Export sub-modules:
