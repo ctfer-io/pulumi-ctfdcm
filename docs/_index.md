@@ -22,24 +22,16 @@ It should be used in conjunction of the [CTFd Provider](https://github.com/ctfer
 {{% choosable language javascript %}}
 
 ```javascript
-import * as ctfd from '@ctfer-io/pulumi-ctfd';
 import * as ctfdcm from '@ctfer-io/pulumi-ctfdcm';
 
 // Stack configuration, other resources, etc.
 // ...
 
 // Create provider
-let pv1 = new ctfd.Provider('ctfd', {
+let pv = new ctfdcm.Provider('ctfdcm', {
     url: 'https://my-ctf.lan',
     apiKey: 'ctfd_xxx', // please do not hardcode your credentials/api keys
 });
-let pv2 = new ctfdcm.Provider('ctfdcm', {
-    url: 'https://my-ctf.lan',
-    apiKey: 'ctfd_xxx', // please do not hardcode your credentials/api keys
-});
-
-// Create scenario file
-let f = new ctfd.File('scenario', { /***/ }, { provider: pv1 });
 
 // Create resources with the custom provider
 let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
@@ -47,8 +39,8 @@ let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
     category: 'misc',
     description: '...',
     value: 500,
-    scenarioId: f.id,
-}, { provider: pv2 });
+    scenario: 'registry:5000/some/scenario:v0.1.0',
+}, { provider: pv });
 
 // Other resources, export, etc.
 // ...
@@ -57,24 +49,16 @@ let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
 {{% /choosable %}} {{% choosable language typescript %}}
 
 ```typescript
-import * as ctfd from '@ctfer-io/pulumi-ctfd';
 import * as ctfdcm from '@ctfer-io/pulumi-ctfdcm';
 
 // Stack configuration, other resources, etc.
 // ...
 
 // Create provider
-let pv1 = new ctfd.Provider('ctfd', {
+let pv = new ctfdcm.Provider('ctfdcm', {
     url: 'https://my-ctf.lan',
     apiKey: 'ctfd_xxx', // please do not hardcode your credentials/api keys
 });
-let pv2 = new ctfdcm.Provider('ctfdcm', {
-    url: 'https://my-ctf.lan',
-    apiKey: 'ctfd_xxx', // please do not hardcode your credentials/api keys
-});
-
-// Create scenario file
-let f = new ctfd.File('scenario', { /***/ }, { provider: pv1 });
 
 // Create resources with the custom provider
 let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
@@ -82,8 +66,8 @@ let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
     category: 'misc',
     description: '...',
     value: 500,
-    scenarioId: f.id,
-}, { provider: pv2 });
+    scenario: 'registry:5000/some/scenario:v0.1.0',
+}, { provider: pv });
 
 // Other resources, export, etc.
 // ...
@@ -95,7 +79,6 @@ let ch = new ctfdcm.ChallengeDynamicIaC('some-challenge', {
 package main
 
 import (
-    "github.com/ctfer-io/pulumi-ctfd/sdk/v2/go/ctfd"
     "github.com/ctfer-io/pulumi-ctfdcm/sdk/go/ctfdcm"
     "github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -106,14 +89,7 @@ func main() {
         // ...
 
         // Create provider
-        pv1, err := ctfd.NewProvider(ctx, "ctfd", &ctfd.ProviderArgs{
-            Url:    pulumi.String("https://my-ctf.lan"),
-            ApiKey: pulumi.String("ctfd_xxx"), // please do not hardcode your credentials/api keys
-        })
-        if err != nil {
-            return err
-        }
-        pv2, err := ctfdcm.NewProvider(ctx, "ctfdcm", &ctfdcm.ProviderArgs{
+        pv, err := ctfdcm.NewProvider(ctx, "ctfdcm", &ctfdcm.ProviderArgs{
             Url:    pulumi.String("https://my-ctf.lan"),
             ApiKey: pulumi.String("ctfd_xxx"), // please do not hardcode your credentials/api keys
         })
@@ -123,14 +99,7 @@ func main() {
 
         // Build resource options to use it
         opts := []pulumi.ResourceOption{
-            pulumi.Provider(pv1),
-            pulumi.Provider(pv2),
-        }
-
-        // Create scenario file
-        f, err := ctfd.NewFile(ctx, "scenario", &ctfd.File{ /***/ }, opts...)
-        if err != nil {
-            return err
+            pulumi.Provider(pv),
         }
 
         // Create resources with the custom provider
@@ -139,7 +108,7 @@ func main() {
             Category:    pulumi.String("misc"),
             Description: pulumi.String("..."),
             Value:       pulumi.Int(500),
-            ScenarioId:  f.ID(),
+            Scenario:    pulumi.String("registry:5000/some/scenario:v0.1.0"),
         }, opts...)
         if err != nil {
             return err
@@ -156,7 +125,6 @@ func main() {
 {{% /choosable %}} {{% choosable language python %}}
 
 ```python
-import ctfer-io_pulumi_ctfd as ctfd
 import ctfer-io_pulumi_ctfdcm as ctfdcm
 import pulumi
 
@@ -164,14 +132,10 @@ import pulumi
 # ...
 
 # Create provider
-pv1 = ctfd.Provider("ctfd", url="https://my-ctf.lan", api_key="ctfd_xxx") # please do not hardcode your credentials/api keys
-pv2 = ctfdcm.Provider("ctfdcm", url="https://my-ctf.lan", api_key="ctfd_xxx") # please do not hardcode your credentials/api keys
-
-# Create scenario file
-f = ctfd.File('scenario', opts=pulumi.ResourceOptions(provider=pv1))
+pv = ctfdcm.Provider("ctfdcm", url="https://my-ctf.lan", api_key="ctfd_xxx") # please do not hardcode your credentials/api keys
 
 # Create resources with the custom provider
-ch = ctfdcm.ChallengeDynamicIaC("some-challenge", name="My Challenge", category="misc", description="...", value=500, scenarioId=f.id opts=pulumi.ResourceOptions(provider=pv2))
+ch = ctfdcm.ChallengeDynamicIaC("some-challenge", name="My Challenge", category="misc", description="...", value=500, scenario="registry:5000/some/scenario:v0.1.0", opts=pulumi.ResourceOptions(provider=pv))
 
 # Other resources, export, etc.
 # ...
@@ -183,7 +147,6 @@ ch = ctfdcm.ChallengeDynamicIaC("some-challenge", name="My Challenge", category=
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
-using CTFerio.Ctfd;
 using CTFerio.Ctfdcm;
 
 class Program
@@ -194,19 +157,10 @@ class Program
             // ...
 
             // Create provider
-            var pv1 = new Ctfd.Provider("ctfd", new Ctfd.ProviderArgs{
+            var pv = new Ctfdcm.Provider("ctfdcm", new Ctfdcm.ProviderArgs{
                 Url = "https://my-ctf.lan",
                 ApiKey = "ctfd_xxx" // please do not hardcode your credentials/api keys
             });
-            var pv2 = new Ctfdcm.Provider("ctfdcm", new Ctfdcm.ProviderArgs{
-                Url = "https://my-ctf.lan",
-                ApiKey = "ctfd_xxx" // please do not hardcode your credentials/api keys
-            });
-
-            // Create scenario file
-            var f = new Ctfd.File("scenario", new Ctfd.File{
-                // ...
-            }, new Pulumi.CustomResourceOptions { Provider = pv1 });
 
             // Create resources with the custom provider
             var ch = new Ctfdcm.ChallengeDynamicIaC("my-challenge", new Ctfdcm.ChallengeDynamicIaCArgs{
@@ -214,7 +168,7 @@ class Program
                 Category = "misc",
                 Description = "...",
                 Value = 500,
-                ScenarioId = f.ID,
+                Scenario = "registry:5000/some/scenario:v0.1.0",
             }, new Pulumi.CustomResourceOptions { Provider = pv });
 
             // Other resources, export, etc.
