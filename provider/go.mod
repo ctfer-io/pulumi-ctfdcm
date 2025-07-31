@@ -5,7 +5,7 @@ go 1.24.5
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240202163305-e2a20ae13ef9
 
 require (
-	github.com/ctfer-io/terraform-provider-ctfdcm v0.4.0
+	github.com/ctfer-io/terraform-provider-ctfdcm v0.4.1
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.109.0
 )
 

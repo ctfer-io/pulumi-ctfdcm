@@ -1272,7 +1272,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
-    def timeout(self) -> pulumi.Output[_builtins.int]:
+    def timeout(self) -> pulumi.Output[Optional[_builtins.int]]:
         """
         The timeout (in seconds) after which the instance will be janitored.
         """
@@ -1288,7 +1288,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
-    def until(self) -> pulumi.Output[_builtins.str]:
+    def until(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The date until the instance could run before being janitored.
         """
