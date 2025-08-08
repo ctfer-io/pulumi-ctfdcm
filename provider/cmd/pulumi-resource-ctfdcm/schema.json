@@ -279,9 +279,7 @@
                 "shared",
                 "state",
                 "tags",
-                "timeout",
                 "topics",
-                "until",
                 "value"
             ],
             "inputProperties": {

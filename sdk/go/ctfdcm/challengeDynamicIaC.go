@@ -111,11 +111,11 @@ type ChallengeDynamicIaC struct {
 	// List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// The timeout (in seconds) after which the instance will be janitored.
-	Timeout pulumi.IntOutput `pulumi:"timeout"`
+	Timeout pulumi.IntPtrOutput `pulumi:"timeout"`
 	// List of challenge topics that are displayed to the administrators for maintenance and planification.
 	Topics pulumi.StringArrayOutput `pulumi:"topics"`
 	// The date until the instance could run before being janitored.
-	Until pulumi.StringOutput `pulumi:"until"`
+	Until pulumi.StringPtrOutput `pulumi:"until"`
 	// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
 	Value pulumi.IntOutput `pulumi:"value"`
 }
@@ -564,8 +564,8 @@ func (o ChallengeDynamicIaCOutput) Tags() pulumi.StringArrayOutput {
 }
 
 // The timeout (in seconds) after which the instance will be janitored.
-func (o ChallengeDynamicIaCOutput) Timeout() pulumi.IntOutput {
-	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.Timeout }).(pulumi.IntOutput)
+func (o ChallengeDynamicIaCOutput) Timeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntPtrOutput { return v.Timeout }).(pulumi.IntPtrOutput)
 }
 
 // List of challenge topics that are displayed to the administrators for maintenance and planification.
@@ -574,8 +574,8 @@ func (o ChallengeDynamicIaCOutput) Topics() pulumi.StringArrayOutput {
 }
 
 // The date until the instance could run before being janitored.
-func (o ChallengeDynamicIaCOutput) Until() pulumi.StringOutput {
-	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringOutput { return v.Until }).(pulumi.StringOutput)
+func (o ChallengeDynamicIaCOutput) Until() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringPtrOutput { return v.Until }).(pulumi.StringPtrOutput)
 }
 
 // The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.

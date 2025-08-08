@@ -187,7 +187,7 @@ namespace CTFerio.Ctfdcm
         /// The timeout (in seconds) after which the instance will be janitored.
         /// </summary>
         [Output("timeout")]
-        public Output<int> Timeout { get; private set; } = null!;
+        public Output<int?> Timeout { get; private set; } = null!;
 
         /// <summary>
         /// List of challenge topics that are displayed to the administrators for maintenance and planification.
@@ -199,7 +199,7 @@ namespace CTFerio.Ctfdcm
         /// The date until the instance could run before being janitored.
         /// </summary>
         [Output("until")]
-        public Output<string> Until { get; private set; } = null!;
+        public Output<string?> Until { get; private set; } = null!;
 
         /// <summary>
         /// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.

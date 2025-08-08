@@ -154,7 +154,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
     /**
      * The timeout (in seconds) after which the instance will be janitored.
      */
-    public readonly timeout!: pulumi.Output<number>;
+    public readonly timeout!: pulumi.Output<number | undefined>;
     /**
      * List of challenge topics that are displayed to the administrators for maintenance and planification.
      */
@@ -162,7 +162,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
     /**
      * The date until the instance could run before being janitored.
      */
-    public readonly until!: pulumi.Output<string>;
+    public readonly until!: pulumi.Output<string | undefined>;
     /**
      * The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
      */
