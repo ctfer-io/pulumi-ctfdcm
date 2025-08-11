@@ -13,9 +13,12 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'ChallengeDynamicIaCRequirements',
+    'GetChallengesDynamiciacChallengeResult',
+    'GetChallengesDynamiciacChallengeRequirementsResult',
 ]
 
 @pulumi.output_type
@@ -43,6 +46,317 @@ class ChallengeDynamicIaCRequirements(dict):
     @_builtins.property
     @pulumi.getter
     def prerequisites(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        List of the challenges ID.
+        """
+        return pulumi.get(self, "prerequisites")
+
+
+@pulumi.output_type
+class GetChallengesDynamiciacChallengeResult(dict):
+    def __init__(__self__, *,
+                 additional: Mapping[str, _builtins.str],
+                 attribution: _builtins.str,
+                 category: _builtins.str,
+                 connection_info: _builtins.str,
+                 decay: _builtins.int,
+                 description: _builtins.str,
+                 destroy_on_flag: _builtins.bool,
+                 function: _builtins.str,
+                 id: _builtins.str,
+                 mana_cost: _builtins.int,
+                 max: _builtins.int,
+                 max_attempts: _builtins.int,
+                 min: _builtins.int,
+                 minimum: _builtins.int,
+                 name: _builtins.str,
+                 next: _builtins.int,
+                 requirements: 'outputs.GetChallengesDynamiciacChallengeRequirementsResult',
+                 scenario: _builtins.str,
+                 shared: _builtins.bool,
+                 state: _builtins.str,
+                 tags: Sequence[_builtins.str],
+                 timeout: _builtins.int,
+                 topics: Sequence[_builtins.str],
+                 until: _builtins.str,
+                 value: _builtins.int):
+        """
+        :param Mapping[str, _builtins.str] additional: An optional key=value map (both strings) to pass to the scenario.
+        :param _builtins.str attribution: Attribution to the creator(s) of the challenge.
+        :param _builtins.str category: Category of the challenge that CTFd groups by on the web UI.
+        :param _builtins.str connection_info: Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+        :param _builtins.int decay: The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+        :param _builtins.str description: Description of the challenge, consider using multiline descriptions for better style.
+        :param _builtins.bool destroy_on_flag: Whether to destroy the instance once flagged.
+        :param _builtins.str function: Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        :param _builtins.str id: Identifier of the challenge.
+        :param _builtins.int mana_cost: The cost (in mana) of the challenge once an instance is deployed.
+        :param _builtins.int max: The number of instances after which not to pool anymore.
+        :param _builtins.int max_attempts: Maximum amount of attempts before being unable to flag the challenge.
+        :param _builtins.int min: The minimum number of instances to set in the pool.
+        :param _builtins.int minimum: The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+        :param _builtins.str name: Name of the challenge, displayed as it.
+        :param _builtins.int next: Suggestion for the end-user as next challenge to work on.
+        :param 'GetChallengesDynamiciacChallengeRequirementsArgs' requirements: List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+        :param _builtins.str scenario: The OCI reference to the scenario.
+        :param _builtins.bool shared: Whether the instance will be shared between all players.
+        :param _builtins.str state: State of the challenge, either hidden or visible.
+        :param Sequence[_builtins.str] tags: List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+        :param _builtins.int timeout: The timeout (in seconds) after which the instance will be janitored.
+        :param Sequence[_builtins.str] topics: List of challenge topics that are displayed to the administrators for maintenance and planification.
+        :param _builtins.str until: The date until the instance could run before being janitored.
+        :param _builtins.int value: The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        """
+        pulumi.set(__self__, "additional", additional)
+        pulumi.set(__self__, "attribution", attribution)
+        pulumi.set(__self__, "category", category)
+        pulumi.set(__self__, "connection_info", connection_info)
+        pulumi.set(__self__, "decay", decay)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "destroy_on_flag", destroy_on_flag)
+        pulumi.set(__self__, "function", function)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "mana_cost", mana_cost)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "max_attempts", max_attempts)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "minimum", minimum)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "next", next)
+        pulumi.set(__self__, "requirements", requirements)
+        pulumi.set(__self__, "scenario", scenario)
+        pulumi.set(__self__, "shared", shared)
+        pulumi.set(__self__, "state", state)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "timeout", timeout)
+        pulumi.set(__self__, "topics", topics)
+        pulumi.set(__self__, "until", until)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def additional(self) -> Mapping[str, _builtins.str]:
+        """
+        An optional key=value map (both strings) to pass to the scenario.
+        """
+        return pulumi.get(self, "additional")
+
+    @_builtins.property
+    @pulumi.getter
+    def attribution(self) -> _builtins.str:
+        """
+        Attribution to the creator(s) of the challenge.
+        """
+        return pulumi.get(self, "attribution")
+
+    @_builtins.property
+    @pulumi.getter
+    def category(self) -> _builtins.str:
+        """
+        Category of the challenge that CTFd groups by on the web UI.
+        """
+        return pulumi.get(self, "category")
+
+    @_builtins.property
+    @pulumi.getter(name="connectionInfo")
+    def connection_info(self) -> _builtins.str:
+        """
+        Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+        """
+        return pulumi.get(self, "connection_info")
+
+    @_builtins.property
+    @pulumi.getter
+    def decay(self) -> _builtins.int:
+        """
+        The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+        """
+        return pulumi.get(self, "decay")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Description of the challenge, consider using multiline descriptions for better style.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="destroyOnFlag")
+    def destroy_on_flag(self) -> _builtins.bool:
+        """
+        Whether to destroy the instance once flagged.
+        """
+        return pulumi.get(self, "destroy_on_flag")
+
+    @_builtins.property
+    @pulumi.getter
+    def function(self) -> _builtins.str:
+        """
+        Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        """
+        return pulumi.get(self, "function")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Identifier of the challenge.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="manaCost")
+    def mana_cost(self) -> _builtins.int:
+        """
+        The cost (in mana) of the challenge once an instance is deployed.
+        """
+        return pulumi.get(self, "mana_cost")
+
+    @_builtins.property
+    @pulumi.getter
+    def max(self) -> _builtins.int:
+        """
+        The number of instances after which not to pool anymore.
+        """
+        return pulumi.get(self, "max")
+
+    @_builtins.property
+    @pulumi.getter(name="maxAttempts")
+    def max_attempts(self) -> _builtins.int:
+        """
+        Maximum amount of attempts before being unable to flag the challenge.
+        """
+        return pulumi.get(self, "max_attempts")
+
+    @_builtins.property
+    @pulumi.getter
+    def min(self) -> _builtins.int:
+        """
+        The minimum number of instances to set in the pool.
+        """
+        return pulumi.get(self, "min")
+
+    @_builtins.property
+    @pulumi.getter
+    def minimum(self) -> _builtins.int:
+        """
+        The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+        """
+        return pulumi.get(self, "minimum")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Name of the challenge, displayed as it.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def next(self) -> _builtins.int:
+        """
+        Suggestion for the end-user as next challenge to work on.
+        """
+        return pulumi.get(self, "next")
+
+    @_builtins.property
+    @pulumi.getter
+    def requirements(self) -> 'outputs.GetChallengesDynamiciacChallengeRequirementsResult':
+        """
+        List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+        """
+        return pulumi.get(self, "requirements")
+
+    @_builtins.property
+    @pulumi.getter
+    def scenario(self) -> _builtins.str:
+        """
+        The OCI reference to the scenario.
+        """
+        return pulumi.get(self, "scenario")
+
+    @_builtins.property
+    @pulumi.getter
+    def shared(self) -> _builtins.bool:
+        """
+        Whether the instance will be shared between all players.
+        """
+        return pulumi.get(self, "shared")
+
+    @_builtins.property
+    @pulumi.getter
+    def state(self) -> _builtins.str:
+        """
+        State of the challenge, either hidden or visible.
+        """
+        return pulumi.get(self, "state")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> Sequence[_builtins.str]:
+        """
+        List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+        """
+        return pulumi.get(self, "tags")
+
+    @_builtins.property
+    @pulumi.getter
+    def timeout(self) -> _builtins.int:
+        """
+        The timeout (in seconds) after which the instance will be janitored.
+        """
+        return pulumi.get(self, "timeout")
+
+    @_builtins.property
+    @pulumi.getter
+    def topics(self) -> Sequence[_builtins.str]:
+        """
+        List of challenge topics that are displayed to the administrators for maintenance and planification.
+        """
+        return pulumi.get(self, "topics")
+
+    @_builtins.property
+    @pulumi.getter
+    def until(self) -> _builtins.str:
+        """
+        The date until the instance could run before being janitored.
+        """
+        return pulumi.get(self, "until")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.int:
+        """
+        The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetChallengesDynamiciacChallengeRequirementsResult(dict):
+    def __init__(__self__, *,
+                 behavior: _builtins.str,
+                 prerequisites: Sequence[_builtins.str]):
+        """
+        :param _builtins.str behavior: Behavior if not unlocked, either hidden or anonymized.
+        :param Sequence[_builtins.str] prerequisites: List of the challenges ID.
+        """
+        pulumi.set(__self__, "behavior", behavior)
+        pulumi.set(__self__, "prerequisites", prerequisites)
+
+    @_builtins.property
+    @pulumi.getter
+    def behavior(self) -> _builtins.str:
+        """
+        Behavior if not unlocked, either hidden or anonymized.
+        """
+        return pulumi.get(self, "behavior")
+
+    @_builtins.property
+    @pulumi.getter
+    def prerequisites(self) -> Sequence[_builtins.str]:
         """
         List of the challenges ID.
         """

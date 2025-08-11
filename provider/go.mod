@@ -5,7 +5,7 @@ go 1.24.5
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240202163305-e2a20ae13ef9
 
 require (
-	github.com/ctfer-io/terraform-provider-ctfdcm v0.4.1
+	github.com/ctfer-io/terraform-provider-ctfdcm v0.5.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.109.0
 )
 
@@ -79,7 +79,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.23.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.15.0 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.15.1 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.28.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.5 // indirect

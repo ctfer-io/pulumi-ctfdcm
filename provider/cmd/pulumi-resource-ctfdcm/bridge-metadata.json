@@ -18,6 +18,36 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "ctfdcm_instance": {
+                "current": "ctfdcm:index/instance:Instance"
+            }
+        },
+        "datasources": {
+            "ctfdcm_challenges_dynamiciac": {
+                "current": "ctfdcm:index/getChallengesDynamiciac:getChallengesDynamiciac",
+                "fields": {
+                    "challenges": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "requirements": {
+                                    "fields": {
+                                        "prerequisites": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "tags": {
+                                    "maxItemsOne": false
+                                },
+                                "topics": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },

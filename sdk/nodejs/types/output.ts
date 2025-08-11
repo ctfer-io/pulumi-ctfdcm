@@ -16,3 +16,117 @@ export interface ChallengeDynamicIaCRequirements {
     prerequisites?: string[];
 }
 
+export interface GetChallengesDynamiciacChallenge {
+    /**
+     * An optional key=value map (both strings) to pass to the scenario.
+     */
+    additional: {[key: string]: string};
+    /**
+     * Attribution to the creator(s) of the challenge.
+     */
+    attribution: string;
+    /**
+     * Category of the challenge that CTFd groups by on the web UI.
+     */
+    category: string;
+    /**
+     * Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+     */
+    connectionInfo: string;
+    /**
+     * The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+     */
+    decay: number;
+    /**
+     * Description of the challenge, consider using multiline descriptions for better style.
+     */
+    description: string;
+    /**
+     * Whether to destroy the instance once flagged.
+     */
+    destroyOnFlag: boolean;
+    /**
+     * Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+     */
+    function: string;
+    /**
+     * Identifier of the challenge.
+     */
+    id: string;
+    /**
+     * The cost (in mana) of the challenge once an instance is deployed.
+     */
+    manaCost: number;
+    /**
+     * The number of instances after which not to pool anymore.
+     */
+    max: number;
+    /**
+     * Maximum amount of attempts before being unable to flag the challenge.
+     */
+    maxAttempts: number;
+    /**
+     * The minimum number of instances to set in the pool.
+     */
+    min: number;
+    /**
+     * The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+     */
+    minimum: number;
+    /**
+     * Name of the challenge, displayed as it.
+     */
+    name: string;
+    /**
+     * Suggestion for the end-user as next challenge to work on.
+     */
+    next: number;
+    /**
+     * List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+     */
+    requirements: outputs.GetChallengesDynamiciacChallengeRequirements;
+    /**
+     * The OCI reference to the scenario.
+     */
+    scenario: string;
+    /**
+     * Whether the instance will be shared between all players.
+     */
+    shared: boolean;
+    /**
+     * State of the challenge, either hidden or visible.
+     */
+    state: string;
+    /**
+     * List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+     */
+    tags: string[];
+    /**
+     * The timeout (in seconds) after which the instance will be janitored.
+     */
+    timeout: number;
+    /**
+     * List of challenge topics that are displayed to the administrators for maintenance and planification.
+     */
+    topics: string[];
+    /**
+     * The date until the instance could run before being janitored.
+     */
+    until: string;
+    /**
+     * The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+     */
+    value: number;
+}
+
+export interface GetChallengesDynamiciacChallengeRequirements {
+    /**
+     * Behavior if not unlocked, either hidden or anonymized.
+     */
+    behavior: string;
+    /**
+     * List of the challenges ID.
+     */
+    prerequisites: string[];
+}
+

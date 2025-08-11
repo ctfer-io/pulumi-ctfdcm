@@ -10,6 +10,16 @@ export type ChallengeDynamicIaC = import("./challengeDynamicIaC").ChallengeDynam
 export const ChallengeDynamicIaC: typeof import("./challengeDynamicIaC").ChallengeDynamicIaC = null as any;
 utilities.lazyLoad(exports, ["ChallengeDynamicIaC"], () => require("./challengeDynamicIaC"));
 
+export { GetChallengesDynamiciacResult } from "./getChallengesDynamiciac";
+export const getChallengesDynamiciac: typeof import("./getChallengesDynamiciac").getChallengesDynamiciac = null as any;
+export const getChallengesDynamiciacOutput: typeof import("./getChallengesDynamiciac").getChallengesDynamiciacOutput = null as any;
+utilities.lazyLoad(exports, ["getChallengesDynamiciac","getChallengesDynamiciacOutput"], () => require("./getChallengesDynamiciac"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
 export * from "./provider";
 import { Provider } from "./provider";
 
@@ -29,12 +39,15 @@ const _module = {
         switch (type) {
             case "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC":
                 return new ChallengeDynamicIaC(name, <any>undefined, { urn })
+            case "ctfdcm:index/instance:Instance":
+                return new Instance(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("ctfdcm", "index/challengeDynamicIaC", _module)
+pulumi.runtime.registerResourceModule("ctfdcm", "index/instance", _module)
 pulumi.runtime.registerResourcePackage("ctfdcm", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
