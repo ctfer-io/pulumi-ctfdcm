@@ -15,3 +15,4 @@ export interface ChallengeDynamicIaCRequirements {
      */
     prerequisites?: pulumi.Input<pulumi.Input<string>[]>;
 }
+

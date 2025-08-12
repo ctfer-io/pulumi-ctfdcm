@@ -169,9 +169,391 @@ func (o ChallengeDynamicIaCRequirementsPtrOutput) Prerequisites() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+type GetChallengesDynamiciacChallenge struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional map[string]string `pulumi:"additional"`
+	// Attribution to the creator(s) of the challenge.
+	Attribution string `pulumi:"attribution"`
+	// Category of the challenge that CTFd groups by on the web UI.
+	Category string `pulumi:"category"`
+	// Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+	ConnectionInfo string `pulumi:"connectionInfo"`
+	// The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+	Decay int `pulumi:"decay"`
+	// Description of the challenge, consider using multiline descriptions for better style.
+	Description string `pulumi:"description"`
+	// Whether to destroy the instance once flagged.
+	DestroyOnFlag bool `pulumi:"destroyOnFlag"`
+	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+	Function string `pulumi:"function"`
+	// Identifier of the challenge.
+	Id string `pulumi:"id"`
+	// The cost (in mana) of the challenge once an instance is deployed.
+	ManaCost int `pulumi:"manaCost"`
+	// The number of instances after which not to pool anymore.
+	Max int `pulumi:"max"`
+	// Maximum amount of attempts before being unable to flag the challenge.
+	MaxAttempts int `pulumi:"maxAttempts"`
+	// The minimum number of instances to set in the pool.
+	Min int `pulumi:"min"`
+	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+	Minimum int `pulumi:"minimum"`
+	// Name of the challenge, displayed as it.
+	Name string `pulumi:"name"`
+	// Suggestion for the end-user as next challenge to work on.
+	Next int `pulumi:"next"`
+	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+	Requirements GetChallengesDynamiciacChallengeRequirements `pulumi:"requirements"`
+	// The OCI reference to the scenario.
+	Scenario string `pulumi:"scenario"`
+	// Whether the instance will be shared between all players.
+	Shared bool `pulumi:"shared"`
+	// State of the challenge, either hidden or visible.
+	State string `pulumi:"state"`
+	// List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+	Tags []string `pulumi:"tags"`
+	// The timeout (in seconds) after which the instance will be janitored.
+	Timeout int `pulumi:"timeout"`
+	// List of challenge topics that are displayed to the administrators for maintenance and planification.
+	Topics []string `pulumi:"topics"`
+	// The date until the instance could run before being janitored.
+	Until string `pulumi:"until"`
+	// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+	Value int `pulumi:"value"`
+}
+
+// GetChallengesDynamiciacChallengeInput is an input type that accepts GetChallengesDynamiciacChallengeArgs and GetChallengesDynamiciacChallengeOutput values.
+// You can construct a concrete instance of `GetChallengesDynamiciacChallengeInput` via:
+//
+//	GetChallengesDynamiciacChallengeArgs{...}
+type GetChallengesDynamiciacChallengeInput interface {
+	pulumi.Input
+
+	ToGetChallengesDynamiciacChallengeOutput() GetChallengesDynamiciacChallengeOutput
+	ToGetChallengesDynamiciacChallengeOutputWithContext(context.Context) GetChallengesDynamiciacChallengeOutput
+}
+
+type GetChallengesDynamiciacChallengeArgs struct {
+	// An optional key=value map (both strings) to pass to the scenario.
+	Additional pulumi.StringMapInput `pulumi:"additional"`
+	// Attribution to the creator(s) of the challenge.
+	Attribution pulumi.StringInput `pulumi:"attribution"`
+	// Category of the challenge that CTFd groups by on the web UI.
+	Category pulumi.StringInput `pulumi:"category"`
+	// Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+	ConnectionInfo pulumi.StringInput `pulumi:"connectionInfo"`
+	// The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+	Decay pulumi.IntInput `pulumi:"decay"`
+	// Description of the challenge, consider using multiline descriptions for better style.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Whether to destroy the instance once flagged.
+	DestroyOnFlag pulumi.BoolInput `pulumi:"destroyOnFlag"`
+	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+	Function pulumi.StringInput `pulumi:"function"`
+	// Identifier of the challenge.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The cost (in mana) of the challenge once an instance is deployed.
+	ManaCost pulumi.IntInput `pulumi:"manaCost"`
+	// The number of instances after which not to pool anymore.
+	Max pulumi.IntInput `pulumi:"max"`
+	// Maximum amount of attempts before being unable to flag the challenge.
+	MaxAttempts pulumi.IntInput `pulumi:"maxAttempts"`
+	// The minimum number of instances to set in the pool.
+	Min pulumi.IntInput `pulumi:"min"`
+	// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+	Minimum pulumi.IntInput `pulumi:"minimum"`
+	// Name of the challenge, displayed as it.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Suggestion for the end-user as next challenge to work on.
+	Next pulumi.IntInput `pulumi:"next"`
+	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+	Requirements GetChallengesDynamiciacChallengeRequirementsInput `pulumi:"requirements"`
+	// The OCI reference to the scenario.
+	Scenario pulumi.StringInput `pulumi:"scenario"`
+	// Whether the instance will be shared between all players.
+	Shared pulumi.BoolInput `pulumi:"shared"`
+	// State of the challenge, either hidden or visible.
+	State pulumi.StringInput `pulumi:"state"`
+	// List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	// The timeout (in seconds) after which the instance will be janitored.
+	Timeout pulumi.IntInput `pulumi:"timeout"`
+	// List of challenge topics that are displayed to the administrators for maintenance and planification.
+	Topics pulumi.StringArrayInput `pulumi:"topics"`
+	// The date until the instance could run before being janitored.
+	Until pulumi.StringInput `pulumi:"until"`
+	// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (GetChallengesDynamiciacChallengeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetChallengesDynamiciacChallenge)(nil)).Elem()
+}
+
+func (i GetChallengesDynamiciacChallengeArgs) ToGetChallengesDynamiciacChallengeOutput() GetChallengesDynamiciacChallengeOutput {
+	return i.ToGetChallengesDynamiciacChallengeOutputWithContext(context.Background())
+}
+
+func (i GetChallengesDynamiciacChallengeArgs) ToGetChallengesDynamiciacChallengeOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetChallengesDynamiciacChallengeOutput)
+}
+
+// GetChallengesDynamiciacChallengeArrayInput is an input type that accepts GetChallengesDynamiciacChallengeArray and GetChallengesDynamiciacChallengeArrayOutput values.
+// You can construct a concrete instance of `GetChallengesDynamiciacChallengeArrayInput` via:
+//
+//	GetChallengesDynamiciacChallengeArray{ GetChallengesDynamiciacChallengeArgs{...} }
+type GetChallengesDynamiciacChallengeArrayInput interface {
+	pulumi.Input
+
+	ToGetChallengesDynamiciacChallengeArrayOutput() GetChallengesDynamiciacChallengeArrayOutput
+	ToGetChallengesDynamiciacChallengeArrayOutputWithContext(context.Context) GetChallengesDynamiciacChallengeArrayOutput
+}
+
+type GetChallengesDynamiciacChallengeArray []GetChallengesDynamiciacChallengeInput
+
+func (GetChallengesDynamiciacChallengeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetChallengesDynamiciacChallenge)(nil)).Elem()
+}
+
+func (i GetChallengesDynamiciacChallengeArray) ToGetChallengesDynamiciacChallengeArrayOutput() GetChallengesDynamiciacChallengeArrayOutput {
+	return i.ToGetChallengesDynamiciacChallengeArrayOutputWithContext(context.Background())
+}
+
+func (i GetChallengesDynamiciacChallengeArray) ToGetChallengesDynamiciacChallengeArrayOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetChallengesDynamiciacChallengeArrayOutput)
+}
+
+type GetChallengesDynamiciacChallengeOutput struct{ *pulumi.OutputState }
+
+func (GetChallengesDynamiciacChallengeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetChallengesDynamiciacChallenge)(nil)).Elem()
+}
+
+func (o GetChallengesDynamiciacChallengeOutput) ToGetChallengesDynamiciacChallengeOutput() GetChallengesDynamiciacChallengeOutput {
+	return o
+}
+
+func (o GetChallengesDynamiciacChallengeOutput) ToGetChallengesDynamiciacChallengeOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeOutput {
+	return o
+}
+
+// An optional key=value map (both strings) to pass to the scenario.
+func (o GetChallengesDynamiciacChallengeOutput) Additional() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) map[string]string { return v.Additional }).(pulumi.StringMapOutput)
+}
+
+// Attribution to the creator(s) of the challenge.
+func (o GetChallengesDynamiciacChallengeOutput) Attribution() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Attribution }).(pulumi.StringOutput)
+}
+
+// Category of the challenge that CTFd groups by on the web UI.
+func (o GetChallengesDynamiciacChallengeOutput) Category() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Category }).(pulumi.StringOutput)
+}
+
+// Connection Information to connect to the challenge instance, useful for pwn or web pentest.
+func (o GetChallengesDynamiciacChallengeOutput) ConnectionInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.ConnectionInfo }).(pulumi.StringOutput)
+}
+
+// The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
+func (o GetChallengesDynamiciacChallengeOutput) Decay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Decay }).(pulumi.IntOutput)
+}
+
+// Description of the challenge, consider using multiline descriptions for better style.
+func (o GetChallengesDynamiciacChallengeOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether to destroy the instance once flagged.
+func (o GetChallengesDynamiciacChallengeOutput) DestroyOnFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) bool { return v.DestroyOnFlag }).(pulumi.BoolOutput)
+}
+
+// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+func (o GetChallengesDynamiciacChallengeOutput) Function() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Function }).(pulumi.StringOutput)
+}
+
+// Identifier of the challenge.
+func (o GetChallengesDynamiciacChallengeOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The cost (in mana) of the challenge once an instance is deployed.
+func (o GetChallengesDynamiciacChallengeOutput) ManaCost() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.ManaCost }).(pulumi.IntOutput)
+}
+
+// The number of instances after which not to pool anymore.
+func (o GetChallengesDynamiciacChallengeOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Max }).(pulumi.IntOutput)
+}
+
+// Maximum amount of attempts before being unable to flag the challenge.
+func (o GetChallengesDynamiciacChallengeOutput) MaxAttempts() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.MaxAttempts }).(pulumi.IntOutput)
+}
+
+// The minimum number of instances to set in the pool.
+func (o GetChallengesDynamiciacChallengeOutput) Min() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Min }).(pulumi.IntOutput)
+}
+
+// The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
+func (o GetChallengesDynamiciacChallengeOutput) Minimum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Minimum }).(pulumi.IntOutput)
+}
+
+// Name of the challenge, displayed as it.
+func (o GetChallengesDynamiciacChallengeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Suggestion for the end-user as next challenge to work on.
+func (o GetChallengesDynamiciacChallengeOutput) Next() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Next }).(pulumi.IntOutput)
+}
+
+// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
+func (o GetChallengesDynamiciacChallengeOutput) Requirements() GetChallengesDynamiciacChallengeRequirementsOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) GetChallengesDynamiciacChallengeRequirements {
+		return v.Requirements
+	}).(GetChallengesDynamiciacChallengeRequirementsOutput)
+}
+
+// The OCI reference to the scenario.
+func (o GetChallengesDynamiciacChallengeOutput) Scenario() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Scenario }).(pulumi.StringOutput)
+}
+
+// Whether the instance will be shared between all players.
+func (o GetChallengesDynamiciacChallengeOutput) Shared() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) bool { return v.Shared }).(pulumi.BoolOutput)
+}
+
+// State of the challenge, either hidden or visible.
+func (o GetChallengesDynamiciacChallengeOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.State }).(pulumi.StringOutput)
+}
+
+// List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
+func (o GetChallengesDynamiciacChallengeOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The timeout (in seconds) after which the instance will be janitored.
+func (o GetChallengesDynamiciacChallengeOutput) Timeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Timeout }).(pulumi.IntOutput)
+}
+
+// List of challenge topics that are displayed to the administrators for maintenance and planification.
+func (o GetChallengesDynamiciacChallengeOutput) Topics() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) []string { return v.Topics }).(pulumi.StringArrayOutput)
+}
+
+// The date until the instance could run before being janitored.
+func (o GetChallengesDynamiciacChallengeOutput) Until() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) string { return v.Until }).(pulumi.StringOutput)
+}
+
+// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+func (o GetChallengesDynamiciacChallengeOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallenge) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type GetChallengesDynamiciacChallengeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetChallengesDynamiciacChallengeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetChallengesDynamiciacChallenge)(nil)).Elem()
+}
+
+func (o GetChallengesDynamiciacChallengeArrayOutput) ToGetChallengesDynamiciacChallengeArrayOutput() GetChallengesDynamiciacChallengeArrayOutput {
+	return o
+}
+
+func (o GetChallengesDynamiciacChallengeArrayOutput) ToGetChallengesDynamiciacChallengeArrayOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeArrayOutput {
+	return o
+}
+
+func (o GetChallengesDynamiciacChallengeArrayOutput) Index(i pulumi.IntInput) GetChallengesDynamiciacChallengeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetChallengesDynamiciacChallenge {
+		return vs[0].([]GetChallengesDynamiciacChallenge)[vs[1].(int)]
+	}).(GetChallengesDynamiciacChallengeOutput)
+}
+
+type GetChallengesDynamiciacChallengeRequirements struct {
+	// Behavior if not unlocked, either hidden or anonymized.
+	Behavior string `pulumi:"behavior"`
+	// List of the challenges ID.
+	Prerequisites []string `pulumi:"prerequisites"`
+}
+
+// GetChallengesDynamiciacChallengeRequirementsInput is an input type that accepts GetChallengesDynamiciacChallengeRequirementsArgs and GetChallengesDynamiciacChallengeRequirementsOutput values.
+// You can construct a concrete instance of `GetChallengesDynamiciacChallengeRequirementsInput` via:
+//
+//	GetChallengesDynamiciacChallengeRequirementsArgs{...}
+type GetChallengesDynamiciacChallengeRequirementsInput interface {
+	pulumi.Input
+
+	ToGetChallengesDynamiciacChallengeRequirementsOutput() GetChallengesDynamiciacChallengeRequirementsOutput
+	ToGetChallengesDynamiciacChallengeRequirementsOutputWithContext(context.Context) GetChallengesDynamiciacChallengeRequirementsOutput
+}
+
+type GetChallengesDynamiciacChallengeRequirementsArgs struct {
+	// Behavior if not unlocked, either hidden or anonymized.
+	Behavior pulumi.StringInput `pulumi:"behavior"`
+	// List of the challenges ID.
+	Prerequisites pulumi.StringArrayInput `pulumi:"prerequisites"`
+}
+
+func (GetChallengesDynamiciacChallengeRequirementsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetChallengesDynamiciacChallengeRequirements)(nil)).Elem()
+}
+
+func (i GetChallengesDynamiciacChallengeRequirementsArgs) ToGetChallengesDynamiciacChallengeRequirementsOutput() GetChallengesDynamiciacChallengeRequirementsOutput {
+	return i.ToGetChallengesDynamiciacChallengeRequirementsOutputWithContext(context.Background())
+}
+
+func (i GetChallengesDynamiciacChallengeRequirementsArgs) ToGetChallengesDynamiciacChallengeRequirementsOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeRequirementsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetChallengesDynamiciacChallengeRequirementsOutput)
+}
+
+type GetChallengesDynamiciacChallengeRequirementsOutput struct{ *pulumi.OutputState }
+
+func (GetChallengesDynamiciacChallengeRequirementsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetChallengesDynamiciacChallengeRequirements)(nil)).Elem()
+}
+
+func (o GetChallengesDynamiciacChallengeRequirementsOutput) ToGetChallengesDynamiciacChallengeRequirementsOutput() GetChallengesDynamiciacChallengeRequirementsOutput {
+	return o
+}
+
+func (o GetChallengesDynamiciacChallengeRequirementsOutput) ToGetChallengesDynamiciacChallengeRequirementsOutputWithContext(ctx context.Context) GetChallengesDynamiciacChallengeRequirementsOutput {
+	return o
+}
+
+// Behavior if not unlocked, either hidden or anonymized.
+func (o GetChallengesDynamiciacChallengeRequirementsOutput) Behavior() pulumi.StringOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallengeRequirements) string { return v.Behavior }).(pulumi.StringOutput)
+}
+
+// List of the challenges ID.
+func (o GetChallengesDynamiciacChallengeRequirementsOutput) Prerequisites() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetChallengesDynamiciacChallengeRequirements) []string { return v.Prerequisites }).(pulumi.StringArrayOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ChallengeDynamicIaCRequirementsInput)(nil)).Elem(), ChallengeDynamicIaCRequirementsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChallengeDynamicIaCRequirementsPtrInput)(nil)).Elem(), ChallengeDynamicIaCRequirementsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetChallengesDynamiciacChallengeInput)(nil)).Elem(), GetChallengesDynamiciacChallengeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetChallengesDynamiciacChallengeArrayInput)(nil)).Elem(), GetChallengesDynamiciacChallengeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetChallengesDynamiciacChallengeRequirementsInput)(nil)).Elem(), GetChallengesDynamiciacChallengeRequirementsArgs{})
 	pulumi.RegisterOutputType(ChallengeDynamicIaCRequirementsOutput{})
 	pulumi.RegisterOutputType(ChallengeDynamicIaCRequirementsPtrOutput{})
+	pulumi.RegisterOutputType(GetChallengesDynamiciacChallengeOutput{})
+	pulumi.RegisterOutputType(GetChallengesDynamiciacChallengeArrayOutput{})
+	pulumi.RegisterOutputType(GetChallengesDynamiciacChallengeRequirementsOutput{})
 }

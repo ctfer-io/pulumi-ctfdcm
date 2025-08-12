@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC":
 		r = &ChallengeDynamicIaC{}
+	case "ctfdcm:index/instance:Instance":
+		r = &Instance{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -57,6 +59,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"ctfdcm",
 		"index/challengeDynamicIaC",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"ctfdcm",
+		"index/instance",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

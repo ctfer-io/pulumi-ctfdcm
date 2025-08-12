@@ -7,6 +7,8 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .challenge_dynamic_ia_c import *
+from .get_challenges_dynamiciac import *
+from .instance import *
 from .provider import *
 from ._inputs import *
 from . import outputs
@@ -27,6 +29,14 @@ _utilities.register(
   "fqn": "ctfer-io_pulumi-ctfdcm",
   "classes": {
    "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC": "ChallengeDynamicIaC"
+  }
+ },
+ {
+  "pkg": "ctfdcm",
+  "mod": "index/instance",
+  "fqn": "ctfer-io_pulumi-ctfdcm",
+  "classes": {
+   "ctfdcm:index/instance:Instance": "Instance"
   }
  }
 ]
