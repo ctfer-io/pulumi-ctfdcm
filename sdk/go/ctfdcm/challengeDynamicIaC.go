@@ -86,6 +86,8 @@ type ChallengeDynamicIaC struct {
 	DestroyOnFlag pulumi.BoolOutput `pulumi:"destroyOnFlag"`
 	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 	Function pulumi.StringOutput `pulumi:"function"`
+	// The flag validation logic.
+	Logic pulumi.StringOutput `pulumi:"logic"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntOutput `pulumi:"manaCost"`
 	// The number of instances after which not to pool anymore.
@@ -184,6 +186,8 @@ type challengeDynamicIaCState struct {
 	DestroyOnFlag *bool `pulumi:"destroyOnFlag"`
 	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 	Function *string `pulumi:"function"`
+	// The flag validation logic.
+	Logic *string `pulumi:"logic"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost *int `pulumi:"manaCost"`
 	// The number of instances after which not to pool anymore.
@@ -235,6 +239,8 @@ type ChallengeDynamicIaCState struct {
 	DestroyOnFlag pulumi.BoolPtrInput
 	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 	Function pulumi.StringPtrInput
+	// The flag validation logic.
+	Logic pulumi.StringPtrInput
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntPtrInput
 	// The number of instances after which not to pool anymore.
@@ -290,6 +296,8 @@ type challengeDynamicIaCArgs struct {
 	DestroyOnFlag *bool `pulumi:"destroyOnFlag"`
 	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 	Function *string `pulumi:"function"`
+	// The flag validation logic.
+	Logic *string `pulumi:"logic"`
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost *int `pulumi:"manaCost"`
 	// The number of instances after which not to pool anymore.
@@ -342,6 +350,8 @@ type ChallengeDynamicIaCArgs struct {
 	DestroyOnFlag pulumi.BoolPtrInput
 	// Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 	Function pulumi.StringPtrInput
+	// The flag validation logic.
+	Logic pulumi.StringPtrInput
 	// The cost (in mana) of the challenge once an instance is deployed.
 	ManaCost pulumi.IntPtrInput
 	// The number of instances after which not to pool anymore.
@@ -501,6 +511,11 @@ func (o ChallengeDynamicIaCOutput) DestroyOnFlag() pulumi.BoolOutput {
 // Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
 func (o ChallengeDynamicIaCOutput) Function() pulumi.StringOutput {
 	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringOutput { return v.Function }).(pulumi.StringOutput)
+}
+
+// The flag validation logic.
+func (o ChallengeDynamicIaCOutput) Logic() pulumi.StringOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.StringOutput { return v.Logic }).(pulumi.StringOutput)
 }
 
 // The cost (in mana) of the challenge once an instance is deployed.

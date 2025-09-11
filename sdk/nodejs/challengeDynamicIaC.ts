@@ -104,6 +104,10 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
      */
     public readonly function!: pulumi.Output<string>;
     /**
+     * The flag validation logic.
+     */
+    public readonly logic!: pulumi.Output<string>;
+    /**
      * The cost (in mana) of the challenge once an instance is deployed.
      */
     public readonly manaCost!: pulumi.Output<number>;
@@ -189,6 +193,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["destroyOnFlag"] = state ? state.destroyOnFlag : undefined;
             resourceInputs["function"] = state ? state.function : undefined;
+            resourceInputs["logic"] = state ? state.logic : undefined;
             resourceInputs["manaCost"] = state ? state.manaCost : undefined;
             resourceInputs["max"] = state ? state.max : undefined;
             resourceInputs["maxAttempts"] = state ? state.maxAttempts : undefined;
@@ -233,6 +238,7 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["destroyOnFlag"] = args ? args.destroyOnFlag : undefined;
             resourceInputs["function"] = args ? args.function : undefined;
+            resourceInputs["logic"] = args ? args.logic : undefined;
             resourceInputs["manaCost"] = args ? args.manaCost : undefined;
             resourceInputs["max"] = args ? args.max : undefined;
             resourceInputs["maxAttempts"] = args ? args.maxAttempts : undefined;
@@ -291,6 +297,10 @@ export interface ChallengeDynamicIaCState {
      * Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
      */
     function?: pulumi.Input<string>;
+    /**
+     * The flag validation logic.
+     */
+    logic?: pulumi.Input<string>;
     /**
      * The cost (in mana) of the challenge once an instance is deployed.
      */
@@ -393,6 +403,10 @@ export interface ChallengeDynamicIaCArgs {
      * Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
      */
     function?: pulumi.Input<string>;
+    /**
+     * The flag validation logic.
+     */
+    logic?: pulumi.Input<string>;
     /**
      * The cost (in mana) of the challenge once an instance is deployed.
      */
