@@ -112,6 +112,12 @@ namespace CTFerio.Ctfdcm
         public Output<string> Function { get; private set; } = null!;
 
         /// <summary>
+        /// The flag validation logic.
+        /// </summary>
+        [Output("logic")]
+        public Output<string> Logic { get; private set; } = null!;
+
+        /// <summary>
         /// The cost (in mana) of the challenge once an instance is deployed.
         /// </summary>
         [Output("manaCost")]
@@ -309,6 +315,12 @@ namespace CTFerio.Ctfdcm
         public Input<string>? Function { get; set; }
 
         /// <summary>
+        /// The flag validation logic.
+        /// </summary>
+        [Input("logic")]
+        public Input<string>? Logic { get; set; }
+
+        /// <summary>
         /// The cost (in mana) of the challenge once an instance is deployed.
         /// </summary>
         [Input("manaCost")]
@@ -477,6 +489,12 @@ namespace CTFerio.Ctfdcm
         /// </summary>
         [Input("function")]
         public Input<string>? Function { get; set; }
+
+        /// <summary>
+        /// The flag validation logic.
+        /// </summary>
+        [Input("logic")]
+        public Input<string>? Logic { get; set; }
 
         /// <summary>
         /// The cost (in mana) of the challenge once an instance is deployed.

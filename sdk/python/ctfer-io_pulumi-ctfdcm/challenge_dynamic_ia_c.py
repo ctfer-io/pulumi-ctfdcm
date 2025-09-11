@@ -32,6 +32,7 @@ class ChallengeDynamicIaCArgs:
                  connection_info: Optional[pulumi.Input[_builtins.str]] = None,
                  destroy_on_flag: Optional[pulumi.Input[_builtins.bool]] = None,
                  function: Optional[pulumi.Input[_builtins.str]] = None,
+                 logic: Optional[pulumi.Input[_builtins.str]] = None,
                  mana_cost: Optional[pulumi.Input[_builtins.int]] = None,
                  max: Optional[pulumi.Input[_builtins.int]] = None,
                  max_attempts: Optional[pulumi.Input[_builtins.int]] = None,
@@ -58,6 +59,7 @@ class ChallengeDynamicIaCArgs:
         :param pulumi.Input[_builtins.str] connection_info: Connection Information to connect to the challenge instance, useful for pwn, web and infrastructure pentests.
         :param pulumi.Input[_builtins.bool] destroy_on_flag: Whether to destroy the instance once flagged.
         :param pulumi.Input[_builtins.str] function: Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        :param pulumi.Input[_builtins.str] logic: The flag validation logic.
         :param pulumi.Input[_builtins.int] mana_cost: The cost (in mana) of the challenge once an instance is deployed.
         :param pulumi.Input[_builtins.int] max: The number of instances after which not to pool anymore.
         :param pulumi.Input[_builtins.int] max_attempts: Maximum amount of attempts before being unable to flag the challenge.
@@ -88,6 +90,8 @@ class ChallengeDynamicIaCArgs:
             pulumi.set(__self__, "destroy_on_flag", destroy_on_flag)
         if function is not None:
             pulumi.set(__self__, "function", function)
+        if logic is not None:
+            pulumi.set(__self__, "logic", logic)
         if mana_cost is not None:
             pulumi.set(__self__, "mana_cost", mana_cost)
         if max is not None:
@@ -246,6 +250,18 @@ class ChallengeDynamicIaCArgs:
     @function.setter
     def function(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "function", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def logic(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The flag validation logic.
+        """
+        return pulumi.get(self, "logic")
+
+    @logic.setter
+    def logic(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "logic", value)
 
     @_builtins.property
     @pulumi.getter(name="manaCost")
@@ -415,6 +431,7 @@ class _ChallengeDynamicIaCState:
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  destroy_on_flag: Optional[pulumi.Input[_builtins.bool]] = None,
                  function: Optional[pulumi.Input[_builtins.str]] = None,
+                 logic: Optional[pulumi.Input[_builtins.str]] = None,
                  mana_cost: Optional[pulumi.Input[_builtins.int]] = None,
                  max: Optional[pulumi.Input[_builtins.int]] = None,
                  max_attempts: Optional[pulumi.Input[_builtins.int]] = None,
@@ -441,6 +458,7 @@ class _ChallengeDynamicIaCState:
         :param pulumi.Input[_builtins.str] description: Description of the challenge, consider using multiline descriptions for better style.
         :param pulumi.Input[_builtins.bool] destroy_on_flag: Whether to destroy the instance once flagged.
         :param pulumi.Input[_builtins.str] function: Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        :param pulumi.Input[_builtins.str] logic: The flag validation logic.
         :param pulumi.Input[_builtins.int] mana_cost: The cost (in mana) of the challenge once an instance is deployed.
         :param pulumi.Input[_builtins.int] max: The number of instances after which not to pool anymore.
         :param pulumi.Input[_builtins.int] max_attempts: Maximum amount of attempts before being unable to flag the challenge.
@@ -474,6 +492,8 @@ class _ChallengeDynamicIaCState:
             pulumi.set(__self__, "destroy_on_flag", destroy_on_flag)
         if function is not None:
             pulumi.set(__self__, "function", function)
+        if logic is not None:
+            pulumi.set(__self__, "logic", logic)
         if mana_cost is not None:
             pulumi.set(__self__, "mana_cost", mana_cost)
         if max is not None:
@@ -602,6 +622,18 @@ class _ChallengeDynamicIaCState:
     @function.setter
     def function(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "function", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def logic(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The flag validation logic.
+        """
+        return pulumi.get(self, "logic")
+
+    @logic.setter
+    def logic(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "logic", value)
 
     @_builtins.property
     @pulumi.getter(name="manaCost")
@@ -810,6 +842,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  destroy_on_flag: Optional[pulumi.Input[_builtins.bool]] = None,
                  function: Optional[pulumi.Input[_builtins.str]] = None,
+                 logic: Optional[pulumi.Input[_builtins.str]] = None,
                  mana_cost: Optional[pulumi.Input[_builtins.int]] = None,
                  max: Optional[pulumi.Input[_builtins.int]] = None,
                  max_attempts: Optional[pulumi.Input[_builtins.int]] = None,
@@ -872,6 +905,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Description of the challenge, consider using multiline descriptions for better style.
         :param pulumi.Input[_builtins.bool] destroy_on_flag: Whether to destroy the instance once flagged.
         :param pulumi.Input[_builtins.str] function: Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        :param pulumi.Input[_builtins.str] logic: The flag validation logic.
         :param pulumi.Input[_builtins.int] mana_cost: The cost (in mana) of the challenge once an instance is deployed.
         :param pulumi.Input[_builtins.int] max: The number of instances after which not to pool anymore.
         :param pulumi.Input[_builtins.int] max_attempts: Maximum amount of attempts before being unable to flag the challenge.
@@ -953,6 +987,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  destroy_on_flag: Optional[pulumi.Input[_builtins.bool]] = None,
                  function: Optional[pulumi.Input[_builtins.str]] = None,
+                 logic: Optional[pulumi.Input[_builtins.str]] = None,
                  mana_cost: Optional[pulumi.Input[_builtins.int]] = None,
                  max: Optional[pulumi.Input[_builtins.int]] = None,
                  max_attempts: Optional[pulumi.Input[_builtins.int]] = None,
@@ -992,6 +1027,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
             __props__.__dict__["description"] = description
             __props__.__dict__["destroy_on_flag"] = destroy_on_flag
             __props__.__dict__["function"] = function
+            __props__.__dict__["logic"] = logic
             __props__.__dict__["mana_cost"] = mana_cost
             __props__.__dict__["max"] = max
             __props__.__dict__["max_attempts"] = max_attempts
@@ -1032,6 +1068,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
             description: Optional[pulumi.Input[_builtins.str]] = None,
             destroy_on_flag: Optional[pulumi.Input[_builtins.bool]] = None,
             function: Optional[pulumi.Input[_builtins.str]] = None,
+            logic: Optional[pulumi.Input[_builtins.str]] = None,
             mana_cost: Optional[pulumi.Input[_builtins.int]] = None,
             max: Optional[pulumi.Input[_builtins.int]] = None,
             max_attempts: Optional[pulumi.Input[_builtins.int]] = None,
@@ -1063,6 +1100,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Description of the challenge, consider using multiline descriptions for better style.
         :param pulumi.Input[_builtins.bool] destroy_on_flag: Whether to destroy the instance once flagged.
         :param pulumi.Input[_builtins.str] function: Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
+        :param pulumi.Input[_builtins.str] logic: The flag validation logic.
         :param pulumi.Input[_builtins.int] mana_cost: The cost (in mana) of the challenge once an instance is deployed.
         :param pulumi.Input[_builtins.int] max: The number of instances after which not to pool anymore.
         :param pulumi.Input[_builtins.int] max_attempts: Maximum amount of attempts before being unable to flag the challenge.
@@ -1092,6 +1130,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["destroy_on_flag"] = destroy_on_flag
         __props__.__dict__["function"] = function
+        __props__.__dict__["logic"] = logic
         __props__.__dict__["mana_cost"] = mana_cost
         __props__.__dict__["max"] = max
         __props__.__dict__["max_attempts"] = max_attempts
@@ -1173,6 +1212,14 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
         """
         return pulumi.get(self, "function")
+
+    @_builtins.property
+    @pulumi.getter
+    def logic(self) -> pulumi.Output[_builtins.str]:
+        """
+        The flag validation logic.
+        """
+        return pulumi.get(self, "logic")
 
     @_builtins.property
     @pulumi.getter(name="manaCost")

@@ -43,6 +43,9 @@ func Provider() tfbridge.ProviderInfo {
 			"ctfdcm_challenge_dynamiciac": {
 				Tok: tfbridge.MakeResource(mainPkg, mainMod, "ChallengeDynamicIaC"),
 			},
+			"ctfdcm_instance": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Instance"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{},
 		JavaScript: &tfbridge.JavaScriptInfo{

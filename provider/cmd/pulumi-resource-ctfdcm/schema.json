@@ -361,6 +361,10 @@
                     "type": "string",
                     "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
                 },
+                "logic": {
+                    "type": "string",
+                    "description": "The flag validation logic.\n"
+                },
                 "manaCost": {
                     "type": "integer",
                     "description": "The cost (in mana) of the challenge once an instance is deployed.\n"
@@ -440,6 +444,7 @@
                 "description",
                 "destroyOnFlag",
                 "function",
+                "logic",
                 "manaCost",
                 "max",
                 "maxAttempts",
@@ -488,6 +493,10 @@
                 "function": {
                     "type": "string",
                     "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
+                },
+                "logic": {
+                    "type": "string",
+                    "description": "The flag validation logic.\n"
                 },
                 "manaCost": {
                     "type": "integer",
@@ -605,6 +614,10 @@
                     "function": {
                         "type": "string",
                         "description": "Decay function to define how the challenge value evolve through solves, either linear or logarithmic.\n"
+                    },
+                    "logic": {
+                        "type": "string",
+                        "description": "The flag validation logic.\n"
                     },
                     "manaCost": {
                         "type": "integer",
