@@ -19,6 +19,7 @@ import * as utilities from "./utilities";
  * import * as ctfdcm from "@ctfer-io/pulumi-ctfdcm";
  *
  * const http = new ctfdcm.ChallengeDynamicIaC("http", {
+ *     name: "My Challenge",
  *     category: "misc",
  *     description: "...",
  *     value: 500,
@@ -37,7 +38,7 @@ import * as utilities from "./utilities";
  *         "basic",
  *     ],
  * });
- * const httpFlag = new ctfd.Flag("httpFlag", {
+ * const httpFlag = new ctfd.Flag("http_flag", {
  *     challengeId: http.id,
  *     content: "CTF{some_flag}",
  * });
@@ -74,103 +75,107 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
     /**
      * An optional key=value map (both strings) to pass to the scenario.
      */
-    public readonly additional!: pulumi.Output<{[key: string]: string}>;
+    declare public readonly additional: pulumi.Output<{[key: string]: string}>;
     /**
      * Attribution to the creator(s) of the challenge.
      */
-    public readonly attribution!: pulumi.Output<string | undefined>;
+    declare public readonly attribution: pulumi.Output<string | undefined>;
     /**
      * Category of the challenge that CTFd groups by on the web UI.
      */
-    public readonly category!: pulumi.Output<string>;
+    declare public readonly category: pulumi.Output<string>;
     /**
      * Connection Information to connect to the challenge instance, useful for pwn, web and infrastructure pentests.
      */
-    public readonly connectionInfo!: pulumi.Output<string>;
+    declare public readonly connectionInfo: pulumi.Output<string>;
     /**
      * The decay defines from each number of solves does the decay function triggers until reaching minimum. This function is defined by CTFd and could be configured through `.function`.
      */
-    public readonly decay!: pulumi.Output<number>;
+    declare public readonly decay: pulumi.Output<number>;
     /**
      * Description of the challenge, consider using multiline descriptions for better style.
      */
-    public readonly description!: pulumi.Output<string>;
+    declare public readonly description: pulumi.Output<string>;
     /**
      * Whether to destroy the instance once flagged.
      */
-    public readonly destroyOnFlag!: pulumi.Output<boolean>;
+    declare public readonly destroyOnFlag: pulumi.Output<boolean>;
     /**
      * Decay function to define how the challenge value evolve through solves, either linear or logarithmic.
      */
-    public readonly function!: pulumi.Output<string>;
+    declare public readonly function: pulumi.Output<string>;
     /**
      * The flag validation logic.
      */
-    public readonly logic!: pulumi.Output<string>;
+    declare public readonly logic: pulumi.Output<string>;
     /**
      * The cost (in mana) of the challenge once an instance is deployed.
      */
-    public readonly manaCost!: pulumi.Output<number>;
+    declare public readonly manaCost: pulumi.Output<number>;
     /**
      * The number of instances after which not to pool anymore.
      */
-    public readonly max!: pulumi.Output<number>;
+    declare public readonly max: pulumi.Output<number>;
     /**
      * Maximum amount of attempts before being unable to flag the challenge.
      */
-    public readonly maxAttempts!: pulumi.Output<number>;
+    declare public readonly maxAttempts: pulumi.Output<number>;
     /**
      * The minimum number of instances to set in the pool.
      */
-    public readonly min!: pulumi.Output<number>;
+    declare public readonly min: pulumi.Output<number>;
     /**
      * The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
      */
-    public readonly minimum!: pulumi.Output<number>;
+    declare public readonly minimum: pulumi.Output<number>;
     /**
      * Name of the challenge, displayed as it.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Suggestion for the end-user as next challenge to work on.
      */
-    public readonly next!: pulumi.Output<number | undefined>;
+    declare public readonly next: pulumi.Output<number | undefined>;
+    /**
+     * The challenge position as displayed to players.
+     */
+    declare public readonly position: pulumi.Output<number>;
     /**
      * List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
      */
-    public readonly requirements!: pulumi.Output<outputs.ChallengeDynamicIaCRequirements | undefined>;
+    declare public readonly requirements: pulumi.Output<outputs.ChallengeDynamicIaCRequirements | undefined>;
     /**
      * The OCI reference to the scenario.
      */
-    public readonly scenario!: pulumi.Output<string>;
+    declare public readonly scenario: pulumi.Output<string>;
     /**
      * Whether the instance will be shared between all players.
      */
-    public readonly shared!: pulumi.Output<boolean>;
+    declare public readonly shared: pulumi.Output<boolean>;
     /**
      * State of the challenge, either hidden or visible.
      */
-    public readonly state!: pulumi.Output<string>;
+    declare public readonly state: pulumi.Output<string>;
     /**
      * List of challenge tags that will be displayed to the end-user. You could use them to give some quick insights of what a challenge involves.
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    declare public readonly tags: pulumi.Output<string[]>;
     /**
      * The timeout (in seconds) after which the instance will be janitored.
      */
-    public readonly timeout!: pulumi.Output<number | undefined>;
+    declare public readonly timeout: pulumi.Output<number | undefined>;
     /**
      * List of challenge topics that are displayed to the administrators for maintenance and planification.
      */
-    public readonly topics!: pulumi.Output<string[]>;
+    declare public readonly topics: pulumi.Output<string[]>;
     /**
      * The date until the instance could run before being janitored.
      */
-    public readonly until!: pulumi.Output<string | undefined>;
+    declare public readonly until: pulumi.Output<string | undefined>;
     /**
      * The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
      */
-    public readonly value!: pulumi.Output<number>;
+    declare public readonly value: pulumi.Output<number>;
 
     /**
      * Create a ChallengeDynamicIaC resource with the given unique name, arguments, and options.
@@ -185,76 +190,78 @@ export class ChallengeDynamicIaC extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ChallengeDynamicIaCState | undefined;
-            resourceInputs["additional"] = state ? state.additional : undefined;
-            resourceInputs["attribution"] = state ? state.attribution : undefined;
-            resourceInputs["category"] = state ? state.category : undefined;
-            resourceInputs["connectionInfo"] = state ? state.connectionInfo : undefined;
-            resourceInputs["decay"] = state ? state.decay : undefined;
-            resourceInputs["description"] = state ? state.description : undefined;
-            resourceInputs["destroyOnFlag"] = state ? state.destroyOnFlag : undefined;
-            resourceInputs["function"] = state ? state.function : undefined;
-            resourceInputs["logic"] = state ? state.logic : undefined;
-            resourceInputs["manaCost"] = state ? state.manaCost : undefined;
-            resourceInputs["max"] = state ? state.max : undefined;
-            resourceInputs["maxAttempts"] = state ? state.maxAttempts : undefined;
-            resourceInputs["min"] = state ? state.min : undefined;
-            resourceInputs["minimum"] = state ? state.minimum : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["next"] = state ? state.next : undefined;
-            resourceInputs["requirements"] = state ? state.requirements : undefined;
-            resourceInputs["scenario"] = state ? state.scenario : undefined;
-            resourceInputs["shared"] = state ? state.shared : undefined;
-            resourceInputs["state"] = state ? state.state : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["timeout"] = state ? state.timeout : undefined;
-            resourceInputs["topics"] = state ? state.topics : undefined;
-            resourceInputs["until"] = state ? state.until : undefined;
-            resourceInputs["value"] = state ? state.value : undefined;
+            resourceInputs["additional"] = state?.additional;
+            resourceInputs["attribution"] = state?.attribution;
+            resourceInputs["category"] = state?.category;
+            resourceInputs["connectionInfo"] = state?.connectionInfo;
+            resourceInputs["decay"] = state?.decay;
+            resourceInputs["description"] = state?.description;
+            resourceInputs["destroyOnFlag"] = state?.destroyOnFlag;
+            resourceInputs["function"] = state?.function;
+            resourceInputs["logic"] = state?.logic;
+            resourceInputs["manaCost"] = state?.manaCost;
+            resourceInputs["max"] = state?.max;
+            resourceInputs["maxAttempts"] = state?.maxAttempts;
+            resourceInputs["min"] = state?.min;
+            resourceInputs["minimum"] = state?.minimum;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["next"] = state?.next;
+            resourceInputs["position"] = state?.position;
+            resourceInputs["requirements"] = state?.requirements;
+            resourceInputs["scenario"] = state?.scenario;
+            resourceInputs["shared"] = state?.shared;
+            resourceInputs["state"] = state?.state;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["timeout"] = state?.timeout;
+            resourceInputs["topics"] = state?.topics;
+            resourceInputs["until"] = state?.until;
+            resourceInputs["value"] = state?.value;
         } else {
             const args = argsOrState as ChallengeDynamicIaCArgs | undefined;
-            if ((!args || args.category === undefined) && !opts.urn) {
+            if (args?.category === undefined && !opts.urn) {
                 throw new Error("Missing required property 'category'");
             }
-            if ((!args || args.decay === undefined) && !opts.urn) {
+            if (args?.decay === undefined && !opts.urn) {
                 throw new Error("Missing required property 'decay'");
             }
-            if ((!args || args.description === undefined) && !opts.urn) {
+            if (args?.description === undefined && !opts.urn) {
                 throw new Error("Missing required property 'description'");
             }
-            if ((!args || args.minimum === undefined) && !opts.urn) {
+            if (args?.minimum === undefined && !opts.urn) {
                 throw new Error("Missing required property 'minimum'");
             }
-            if ((!args || args.scenario === undefined) && !opts.urn) {
+            if (args?.scenario === undefined && !opts.urn) {
                 throw new Error("Missing required property 'scenario'");
             }
-            if ((!args || args.value === undefined) && !opts.urn) {
+            if (args?.value === undefined && !opts.urn) {
                 throw new Error("Missing required property 'value'");
             }
-            resourceInputs["additional"] = args ? args.additional : undefined;
-            resourceInputs["attribution"] = args ? args.attribution : undefined;
-            resourceInputs["category"] = args ? args.category : undefined;
-            resourceInputs["connectionInfo"] = args ? args.connectionInfo : undefined;
-            resourceInputs["decay"] = args ? args.decay : undefined;
-            resourceInputs["description"] = args ? args.description : undefined;
-            resourceInputs["destroyOnFlag"] = args ? args.destroyOnFlag : undefined;
-            resourceInputs["function"] = args ? args.function : undefined;
-            resourceInputs["logic"] = args ? args.logic : undefined;
-            resourceInputs["manaCost"] = args ? args.manaCost : undefined;
-            resourceInputs["max"] = args ? args.max : undefined;
-            resourceInputs["maxAttempts"] = args ? args.maxAttempts : undefined;
-            resourceInputs["min"] = args ? args.min : undefined;
-            resourceInputs["minimum"] = args ? args.minimum : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["next"] = args ? args.next : undefined;
-            resourceInputs["requirements"] = args ? args.requirements : undefined;
-            resourceInputs["scenario"] = args ? args.scenario : undefined;
-            resourceInputs["shared"] = args ? args.shared : undefined;
-            resourceInputs["state"] = args ? args.state : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["timeout"] = args ? args.timeout : undefined;
-            resourceInputs["topics"] = args ? args.topics : undefined;
-            resourceInputs["until"] = args ? args.until : undefined;
-            resourceInputs["value"] = args ? args.value : undefined;
+            resourceInputs["additional"] = args?.additional;
+            resourceInputs["attribution"] = args?.attribution;
+            resourceInputs["category"] = args?.category;
+            resourceInputs["connectionInfo"] = args?.connectionInfo;
+            resourceInputs["decay"] = args?.decay;
+            resourceInputs["description"] = args?.description;
+            resourceInputs["destroyOnFlag"] = args?.destroyOnFlag;
+            resourceInputs["function"] = args?.function;
+            resourceInputs["logic"] = args?.logic;
+            resourceInputs["manaCost"] = args?.manaCost;
+            resourceInputs["max"] = args?.max;
+            resourceInputs["maxAttempts"] = args?.maxAttempts;
+            resourceInputs["min"] = args?.min;
+            resourceInputs["minimum"] = args?.minimum;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["next"] = args?.next;
+            resourceInputs["position"] = args?.position;
+            resourceInputs["requirements"] = args?.requirements;
+            resourceInputs["scenario"] = args?.scenario;
+            resourceInputs["shared"] = args?.shared;
+            resourceInputs["state"] = args?.state;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["timeout"] = args?.timeout;
+            resourceInputs["topics"] = args?.topics;
+            resourceInputs["until"] = args?.until;
+            resourceInputs["value"] = args?.value;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ChallengeDynamicIaC.__pulumiType, name, resourceInputs, opts);
@@ -329,6 +336,10 @@ export interface ChallengeDynamicIaCState {
      * Suggestion for the end-user as next challenge to work on.
      */
     next?: pulumi.Input<number>;
+    /**
+     * The challenge position as displayed to players.
+     */
+    position?: pulumi.Input<number>;
     /**
      * List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
      */
@@ -435,6 +446,10 @@ export interface ChallengeDynamicIaCArgs {
      * Suggestion for the end-user as next challenge to work on.
      */
     next?: pulumi.Input<number>;
+    /**
+     * The challenge position as displayed to players.
+     */
+    position?: pulumi.Input<number>;
     /**
      * List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
      */

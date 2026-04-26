@@ -34,9 +34,7 @@ namespace CTFerio.Ctfdcm
 
         private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
         /// <summary>
-        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        /// policy.
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         /// </summary>
         public static string? ApiKey
         {
@@ -46,8 +44,7 @@ namespace CTFerio.Ctfdcm
 
         private static readonly __Value<string?> _password = new __Value<string?>(() => __config.Get("password"));
         /// <summary>
-        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        /// instead.
+        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         /// </summary>
         public static string? Password
         {
@@ -67,8 +64,7 @@ namespace CTFerio.Ctfdcm
 
         private static readonly __Value<string?> _username = new __Value<string?>(() => __config.Get("username"));
         /// <summary>
-        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        /// instead.
+        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         /// </summary>
         public static string? Username
         {

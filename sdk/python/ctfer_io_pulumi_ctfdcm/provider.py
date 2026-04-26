@@ -25,14 +25,10 @@ class ProviderArgs:
                  username: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
-        :param pulumi.Input[_builtins.str] api_key: User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-               authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-               policy.
-        :param pulumi.Input[_builtins.str] password: The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-               instead.
+        :param pulumi.Input[_builtins.str] api_key: User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
+        :param pulumi.Input[_builtins.str] password: The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         :param pulumi.Input[_builtins.str] url: CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
-        :param pulumi.Input[_builtins.str] username: The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-               instead.
+        :param pulumi.Input[_builtins.str] username: The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -47,9 +43,7 @@ class ProviderArgs:
     @pulumi.getter(name="apiKey")
     def api_key(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        policy.
+        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         """
         return pulumi.get(self, "api_key")
 
@@ -61,8 +55,7 @@ class ProviderArgs:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        instead.
+        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         """
         return pulumi.get(self, "password")
 
@@ -86,8 +79,7 @@ class ProviderArgs:
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        instead.
+        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         """
         return pulumi.get(self, "username")
 
@@ -115,14 +107,10 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] api_key: User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-               authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-               policy.
-        :param pulumi.Input[_builtins.str] password: The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-               instead.
+        :param pulumi.Input[_builtins.str] api_key: User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
+        :param pulumi.Input[_builtins.str] password: The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         :param pulumi.Input[_builtins.str] url: CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
-        :param pulumi.Input[_builtins.str] username: The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-               instead.
+        :param pulumi.Input[_builtins.str] username: The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         """
         ...
     @overload
@@ -180,9 +168,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        policy.
+        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         """
         return pulumi.get(self, "api_key")
 
@@ -190,8 +176,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        instead.
+        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         """
         return pulumi.get(self, "password")
 
@@ -207,8 +192,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter
     def username(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        instead.
+        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         """
         return pulumi.get(self, "username")
 

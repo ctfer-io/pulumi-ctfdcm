@@ -20,16 +20,13 @@ namespace CTFerio.Ctfdcm
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
-        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        /// policy.
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         /// </summary>
         [Output("apiKey")]
         public Output<string?> ApiKey { get; private set; } = null!;
 
         /// <summary>
-        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        /// instead.
+        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
@@ -41,8 +38,7 @@ namespace CTFerio.Ctfdcm
         public Output<string?> Url { get; private set; } = null!;
 
         /// <summary>
-        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        /// instead.
+        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         /// </summary>
         [Output("username")]
         public Output<string?> Username { get; private set; } = null!;
@@ -92,9 +88,7 @@ namespace CTFerio.Ctfdcm
         private Input<string>? _apiKey;
 
         /// <summary>
-        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        /// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        /// policy.
+        /// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         /// </summary>
         public Input<string>? ApiKey
         {
@@ -110,8 +104,7 @@ namespace CTFerio.Ctfdcm
         private Input<string>? _password;
 
         /// <summary>
-        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        /// instead.
+        /// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         /// </summary>
         public Input<string>? Password
         {
@@ -133,8 +126,7 @@ namespace CTFerio.Ctfdcm
         private Input<string>? _username;
 
         /// <summary>
-        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        /// instead.
+        /// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         /// </summary>
         public Input<string>? Username
         {

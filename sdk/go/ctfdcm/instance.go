@@ -32,6 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			chall, err := ctfdcm.NewChallengeDynamicIaC(ctx, "chall", &ctfdcm.ChallengeDynamicIaCArgs{
+//				Name:        pulumi.String("Some challenge"),
 //				Category:    pulumi.String("cat"),
 //				Description: pulumi.String("..."),
 //				Value:       pulumi.Int(500),
@@ -45,6 +46,7 @@ import (
 //				return err
 //			}
 //			pandatix, err := ctfd.NewUser(ctx, "pandatix", &ctfd.UserArgs{
+//				Name:     pulumi.String("PandatiX"),
 //				Email:    pulumi.String("lucastesson@protonmail.com"),
 //				Password: pulumi.String("password"),
 //			})
@@ -52,6 +54,7 @@ import (
 //				return err
 //			}
 //			ctfer, err := ctfd.NewTeam(ctx, "ctfer", &ctfd.TeamArgs{
+//				Name:     pulumi.String("CTFer.io"),
 //				Email:    pulumi.String("ctfer-io@protonmail.com"),
 //				Password: pulumi.String("ctfer"),
 //				Members: pulumi.StringArray{

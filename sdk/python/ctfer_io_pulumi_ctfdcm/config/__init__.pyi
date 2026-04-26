@@ -16,15 +16,12 @@ from .. import _utilities
 
 apiKey: Optional[str]
 """
-User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-policy.
+User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 """
 
 password: Optional[str]
 """
-The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-instead.
+The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 """
 
 url: Optional[str]
@@ -34,7 +31,6 @@ CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment vari
 
 username: Optional[str]
 """
-The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-instead.
+The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 """
 

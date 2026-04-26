@@ -23,17 +23,14 @@ class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def api_key(self) -> Optional[str]:
         """
-        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-        authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-        policy.
+        User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
         """
         return __config__.get('apiKey')
 
     @_builtins.property
     def password(self) -> Optional[str]:
         """
-        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-        instead.
+        The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
         """
         return __config__.get('password')
 
@@ -47,8 +44,7 @@ class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def username(self) -> Optional[str]:
         """
-        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-        instead.
+        The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
         """
         return __config__.get('username')
 

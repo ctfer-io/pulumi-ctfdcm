@@ -18,17 +18,13 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-	// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-	// policy.
+	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 	ApiKey pulumi.StringPtrOutput `pulumi:"apiKey"`
-	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-	// instead.
+	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
 	Url pulumi.StringPtrOutput `pulumi:"url"`
-	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-	// instead.
+	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 	Username pulumi.StringPtrOutput `pulumi:"username"`
 }
 
@@ -64,33 +60,25 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-	// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-	// policy.
+	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 	ApiKey *string `pulumi:"apiKey"`
-	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-	// instead.
+	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 	Password *string `pulumi:"password"`
 	// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
 	Url *string `pulumi:"url"`
-	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-	// instead.
+	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 	Username *string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-	// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-	// policy.
+	// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 	ApiKey pulumi.StringPtrInput
-	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-	// instead.
+	// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 	Password pulumi.StringPtrInput
 	// CTFd base URL (e.g. `https://my-ctf.lan`). Could use `CTFD_URL` environment variable instead.
 	Url pulumi.StringPtrInput
-	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-	// instead.
+	// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 	Username pulumi.StringPtrInput
 }
 
@@ -154,15 +142,12 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
-// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-// policy.
+// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 func (o ProviderOutput) ApiKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ApiKey }).(pulumi.StringPtrOutput)
 }
 
-// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-// instead.
+// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 func (o ProviderOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
@@ -172,8 +157,7 @@ func (o ProviderOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
-// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-// instead.
+// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 func (o ProviderOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Username }).(pulumi.StringPtrOutput)
 }

@@ -26,8 +26,9 @@ namespace CTFerio.Ctfdcm
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var http = new Ctfdcm.ChallengeDynamicIaC("http", new()
+    ///     var http = new Ctfdcm.Index.ChallengeDynamicIaC("http", new()
     ///     {
+    ///         Name = "My Challenge",
     ///         Category = "misc",
     ///         Description = "...",
     ///         Value = 500,
@@ -51,7 +52,7 @@ namespace CTFerio.Ctfdcm
     ///         },
     ///     });
     /// 
-    ///     var httpFlag = new Ctfd.Flag("httpFlag", new()
+    ///     var httpFlag = new Ctfd.Index.Flag("http_flag", new()
     ///     {
     ///         ChallengeId = http.Id,
     ///         Content = "CTF{some_flag}",
@@ -160,6 +161,12 @@ namespace CTFerio.Ctfdcm
         public Output<int?> Next { get; private set; } = null!;
 
         /// <summary>
+        /// The challenge position as displayed to players.
+        /// </summary>
+        [Output("position")]
+        public Output<int> Position { get; private set; } = null!;
+
+        /// <summary>
         /// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         /// </summary>
         [Output("requirements")]
@@ -208,7 +215,7 @@ namespace CTFerio.Ctfdcm
         public Output<string?> Until { get; private set; } = null!;
 
         /// <summary>
-        /// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        /// The value (points) of the challenge once solved. It is mapped to `Initial` under the hood, but displayed as `Value` for consistency with the standard challenge.
         /// </summary>
         [Output("value")]
         public Output<int> Value { get; private set; } = null!;
@@ -363,6 +370,12 @@ namespace CTFerio.Ctfdcm
         public Input<int>? Next { get; set; }
 
         /// <summary>
+        /// The challenge position as displayed to players.
+        /// </summary>
+        [Input("position")]
+        public Input<int>? Position { get; set; }
+
+        /// <summary>
         /// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         /// </summary>
         [Input("requirements")]
@@ -423,7 +436,7 @@ namespace CTFerio.Ctfdcm
         public Input<string>? Until { get; set; }
 
         /// <summary>
-        /// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        /// The value (points) of the challenge once solved. It is mapped to `Initial` under the hood, but displayed as `Value` for consistency with the standard challenge.
         /// </summary>
         [Input("value", required: true)]
         public Input<int> Value { get; set; } = null!;
@@ -539,6 +552,12 @@ namespace CTFerio.Ctfdcm
         public Input<int>? Next { get; set; }
 
         /// <summary>
+        /// The challenge position as displayed to players.
+        /// </summary>
+        [Input("position")]
+        public Input<int>? Position { get; set; }
+
+        /// <summary>
         /// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         /// </summary>
         [Input("requirements")]
@@ -599,7 +618,7 @@ namespace CTFerio.Ctfdcm
         public Input<string>? Until { get; set; }
 
         /// <summary>
-        /// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        /// The value (points) of the challenge once solved. It is mapped to `Initial` under the hood, but displayed as `Value` for consistency with the standard challenge.
         /// </summary>
         [Input("value")]
         public Input<int>? Value { get; set; }

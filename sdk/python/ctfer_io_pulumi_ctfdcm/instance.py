@@ -112,10 +112,11 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import ctfer-io_pulumi-ctfd as ctfd
-        import ctfer-io_pulumi-ctfdcm as ctfdcm
+        import ctfer_io_pulumi_ctfd as ctfd
+        import ctfer_io_pulumi_ctfdcm as ctfdcm
 
         chall = ctfdcm.ChallengeDynamicIaC("chall",
+            name="Some challenge",
             category="cat",
             description="...",
             value=500,
@@ -125,9 +126,11 @@ class Instance(pulumi.CustomResource):
             shared=True,
             scenario="localhost:5000/some/scenario:v0.1.0")
         pandatix = ctfd.User("pandatix",
+            name="PandatiX",
             email="lucastesson@protonmail.com",
             password="password")
         ctfer = ctfd.Team("ctfer",
+            name="CTFer.io",
             email="ctfer-io@protonmail.com",
             password="ctfer",
             members=[pandatix.id],
@@ -157,10 +160,11 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import ctfer-io_pulumi-ctfd as ctfd
-        import ctfer-io_pulumi-ctfdcm as ctfdcm
+        import ctfer_io_pulumi_ctfd as ctfd
+        import ctfer_io_pulumi_ctfdcm as ctfdcm
 
         chall = ctfdcm.ChallengeDynamicIaC("chall",
+            name="Some challenge",
             category="cat",
             description="...",
             value=500,
@@ -170,9 +174,11 @@ class Instance(pulumi.CustomResource):
             shared=True,
             scenario="localhost:5000/some/scenario:v0.1.0")
         pandatix = ctfd.User("pandatix",
+            name="PandatiX",
             email="lucastesson@protonmail.com",
             password="password")
         ctfer = ctfd.Team("ctfer",
+            name="CTFer.io",
             email="ctfer-io@protonmail.com",
             password="ctfer",
             members=[pandatix.id],
