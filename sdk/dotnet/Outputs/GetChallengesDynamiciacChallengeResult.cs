@@ -111,7 +111,7 @@ namespace CTFerio.Ctfdcm.Outputs
         /// </summary>
         public readonly string Until;
         /// <summary>
-        /// The value (points) of the challenge once solved. It is mapped to `initial` under the hood, but displayed as `value` for consistency with the standard challenge.
+        /// The value (points) of the challenge once solved. It is mapped to `Initial` under the hood, but displayed as `Value` for consistency with the standard challenge.
         /// </summary>
         public readonly int Value;
 

@@ -32,6 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			http, err := ctfdcm.NewChallengeDynamicIaC(ctx, "http", &ctfdcm.ChallengeDynamicIaCArgs{
+//				Name:          pulumi.String("My Challenge"),
 //				Category:      pulumi.String("misc"),
 //				Description:   pulumi.String("..."),
 //				Value:         pulumi.Int(500),
@@ -55,7 +56,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ctfd.NewFlag(ctx, "httpFlag", &ctfd.FlagArgs{
+//			_, err = ctfd.NewFlag(ctx, "http_flag", &ctfd.FlagArgs{
 //				ChallengeId: http.ID(),
 //				Content:     pulumi.String("CTF{some_flag}"),
 //			})
@@ -102,6 +103,8 @@ type ChallengeDynamicIaC struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Suggestion for the end-user as next challenge to work on.
 	Next pulumi.IntPtrOutput `pulumi:"next"`
+	// The challenge position as displayed to players.
+	Position pulumi.IntOutput `pulumi:"position"`
 	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
 	Requirements ChallengeDynamicIaCRequirementsPtrOutput `pulumi:"requirements"`
 	// The OCI reference to the scenario.
@@ -202,6 +205,8 @@ type challengeDynamicIaCState struct {
 	Name *string `pulumi:"name"`
 	// Suggestion for the end-user as next challenge to work on.
 	Next *int `pulumi:"next"`
+	// The challenge position as displayed to players.
+	Position *int `pulumi:"position"`
 	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
 	Requirements *ChallengeDynamicIaCRequirements `pulumi:"requirements"`
 	// The OCI reference to the scenario.
@@ -255,6 +260,8 @@ type ChallengeDynamicIaCState struct {
 	Name pulumi.StringPtrInput
 	// Suggestion for the end-user as next challenge to work on.
 	Next pulumi.IntPtrInput
+	// The challenge position as displayed to players.
+	Position pulumi.IntPtrInput
 	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
 	Requirements ChallengeDynamicIaCRequirementsPtrInput
 	// The OCI reference to the scenario.
@@ -312,6 +319,8 @@ type challengeDynamicIaCArgs struct {
 	Name *string `pulumi:"name"`
 	// Suggestion for the end-user as next challenge to work on.
 	Next *int `pulumi:"next"`
+	// The challenge position as displayed to players.
+	Position *int `pulumi:"position"`
 	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
 	Requirements *ChallengeDynamicIaCRequirements `pulumi:"requirements"`
 	// The OCI reference to the scenario.
@@ -366,6 +375,8 @@ type ChallengeDynamicIaCArgs struct {
 	Name pulumi.StringPtrInput
 	// Suggestion for the end-user as next challenge to work on.
 	Next pulumi.IntPtrInput
+	// The challenge position as displayed to players.
+	Position pulumi.IntPtrInput
 	// List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
 	Requirements ChallengeDynamicIaCRequirementsPtrInput
 	// The OCI reference to the scenario.
@@ -551,6 +562,11 @@ func (o ChallengeDynamicIaCOutput) Name() pulumi.StringOutput {
 // Suggestion for the end-user as next challenge to work on.
 func (o ChallengeDynamicIaCOutput) Next() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntPtrOutput { return v.Next }).(pulumi.IntPtrOutput)
+}
+
+// The challenge position as displayed to players.
+func (o ChallengeDynamicIaCOutput) Position() pulumi.IntOutput {
+	return o.ApplyT(func(v *ChallengeDynamicIaC) pulumi.IntOutput { return v.Position }).(pulumi.IntOutput)
 }
 
 // List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.

@@ -1,6 +1,7 @@
 package ctfd
 
 import (
+	"context"
 	"fmt"
 	"path"
 
@@ -12,6 +13,8 @@ import (
 	pf "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/trace"
 )
 
 const (
@@ -22,9 +25,12 @@ const (
 //go:embed cmd/pulumi-resource-ctfdcm/bridge-metadata.json
 var metadata []byte
 
-func Provider() tfbridge.ProviderInfo {
+func Provider(ctx context.Context, tp trace.TracerProvider) tfbridge.ProviderInfo {
+	if tp == nil {
+		tp = otel.GetTracerProvider()
+	}
 	prov := tfbridge.ProviderInfo{
-		P:                 pf.ShimProvider(ctfdcm.New(version.Version)()),
+		P:                 pf.ShimProviderWithContext(ctx, ctfdcm.New(version.Version, tp)()),
 		Version:           version.Version,
 		Name:              "ctfdcm",
 		DisplayName:       "CTFd-CM",
@@ -49,7 +55,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@ctfer-io/pulumi-ctfdcm",
+			PackageName: fmt.Sprintf("@ctfer-io/pulumi-%[1]s", mainPkg),
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -60,7 +66,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName: fmt.Sprintf("ctfer-io_pulumi-%[1]s", mainPkg),
+			PackageName: fmt.Sprintf("ctfer_io_pulumi_%[1]s", mainPkg),
 			// List any Python dependencies and their version ranges
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",

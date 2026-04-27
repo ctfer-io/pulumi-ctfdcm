@@ -11,15 +11,12 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
-// authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
-// policy.
+// User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
 func GetApiKey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:apiKey")
 }
 
-// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
-// instead.
+// The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
 func GetPassword(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:password")
 }
@@ -29,8 +26,7 @@ func GetUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:url")
 }
 
-// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
-// instead.
+// The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
 func GetUsername(ctx *pulumi.Context) string {
 	return config.Get(ctx, "ctfdcm:username")
 }

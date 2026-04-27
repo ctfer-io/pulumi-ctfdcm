@@ -8,9 +8,7 @@ declare var exports: any;
 const __config = new pulumi.Config("ctfdcm");
 
 /**
- * User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to
- * authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation
- * policy.
+ * User API key. Could use `CTFD_API_KEY` environment variable instead. Despite being the most convenient way to authenticate yourself, we do not recommend it as you will probably generate a long-live token without any rotation policy.
  */
 export declare const apiKey: string | undefined;
 Object.defineProperty(exports, "apiKey", {
@@ -21,8 +19,7 @@ Object.defineProperty(exports, "apiKey", {
 });
 
 /**
- * The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable
- * instead.
+ * The administrator or service account password to login with. Could use `CTFD_ADMIN_PASSWORD` environment variable instead.
  */
 export declare const password: string | undefined;
 Object.defineProperty(exports, "password", {
@@ -44,8 +41,7 @@ Object.defineProperty(exports, "url", {
 });
 
 /**
- * The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable
- * instead.
+ * The administrator or service account username to login with. Could use `CTFD_ADMIN_USERNAME` environment variable instead.
  */
 export declare const username: string | undefined;
 Object.defineProperty(exports, "username", {

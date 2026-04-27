@@ -15,10 +15,10 @@ from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
-    import ctfer-io_pulumi-ctfdcm.config as __config
+    import ctfer_io_pulumi_ctfdcm.config as __config
     config = __config
 else:
-    config = _utilities.lazy_import('ctfer-io_pulumi-ctfdcm.config')
+    config = _utilities.lazy_import('ctfer_io_pulumi_ctfdcm.config')
 
 _utilities.register(
     resource_modules="""
@@ -26,7 +26,7 @@ _utilities.register(
  {
   "pkg": "ctfdcm",
   "mod": "index/challengeDynamicIaC",
-  "fqn": "ctfer-io_pulumi-ctfdcm",
+  "fqn": "ctfer_io_pulumi_ctfdcm",
   "classes": {
    "ctfdcm:index/challengeDynamicIaC:ChallengeDynamicIaC": "ChallengeDynamicIaC"
   }
@@ -34,7 +34,7 @@ _utilities.register(
  {
   "pkg": "ctfdcm",
   "mod": "index/instance",
-  "fqn": "ctfer-io_pulumi-ctfdcm",
+  "fqn": "ctfer_io_pulumi_ctfdcm",
   "classes": {
    "ctfdcm:index/instance:Instance": "Instance"
   }
@@ -46,7 +46,7 @@ _utilities.register(
  {
   "pkg": "ctfdcm",
   "token": "pulumi:providers:ctfdcm",
-  "fqn": "ctfer-io_pulumi-ctfdcm",
+  "fqn": "ctfer_io_pulumi_ctfdcm",
   "class": "Provider"
  }
 ]

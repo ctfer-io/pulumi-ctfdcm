@@ -26,8 +26,9 @@ namespace CTFerio.Ctfdcm
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var chall = new Ctfdcm.ChallengeDynamicIaC("chall", new()
+    ///     var chall = new Ctfdcm.Index.ChallengeDynamicIaC("chall", new()
     ///     {
+    ///         Name = "Some challenge",
     ///         Category = "cat",
     ///         Description = "...",
     ///         Value = 500,
@@ -38,14 +39,16 @@ namespace CTFerio.Ctfdcm
     ///         Scenario = "localhost:5000/some/scenario:v0.1.0",
     ///     });
     /// 
-    ///     var pandatix = new Ctfd.User("pandatix", new()
+    ///     var pandatix = new Ctfd.Index.User("pandatix", new()
     ///     {
+    ///         Name = "PandatiX",
     ///         Email = "lucastesson@protonmail.com",
     ///         Password = "password",
     ///     });
     /// 
-    ///     var ctfer = new Ctfd.Team("ctfer", new()
+    ///     var ctfer = new Ctfd.Index.Team("ctfer", new()
     ///     {
+    ///         Name = "CTFer.io",
     ///         Email = "ctfer-io@protonmail.com",
     ///         Password = "ctfer",
     ///         Members = new[]
@@ -55,7 +58,7 @@ namespace CTFerio.Ctfdcm
     ///         Captain = pandatix.Id,
     ///     });
     /// 
-    ///     var ist = new Ctfdcm.Instance("ist", new()
+    ///     var ist = new Ctfdcm.Index.Instance("ist", new()
     ///     {
     ///         ChallengeId = chall.Id,
     ///         SourceId = ctfer.Id,

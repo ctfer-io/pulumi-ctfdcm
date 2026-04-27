@@ -39,6 +39,7 @@ class ChallengeDynamicIaCArgs:
                  min: Optional[pulumi.Input[_builtins.int]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  next: Optional[pulumi.Input[_builtins.int]] = None,
+                 position: Optional[pulumi.Input[_builtins.int]] = None,
                  requirements: Optional[pulumi.Input['ChallengeDynamicIaCRequirementsArgs']] = None,
                  shared: Optional[pulumi.Input[_builtins.bool]] = None,
                  state: Optional[pulumi.Input[_builtins.str]] = None,
@@ -66,6 +67,7 @@ class ChallengeDynamicIaCArgs:
         :param pulumi.Input[_builtins.int] min: The minimum number of instances to set in the pool.
         :param pulumi.Input[_builtins.str] name: Name of the challenge, displayed as it.
         :param pulumi.Input[_builtins.int] next: Suggestion for the end-user as next challenge to work on.
+        :param pulumi.Input[_builtins.int] position: The challenge position as displayed to players.
         :param pulumi.Input['ChallengeDynamicIaCRequirementsArgs'] requirements: List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         :param pulumi.Input[_builtins.bool] shared: Whether the instance will be shared between all players.
         :param pulumi.Input[_builtins.str] state: State of the challenge, either hidden or visible.
@@ -104,6 +106,8 @@ class ChallengeDynamicIaCArgs:
             pulumi.set(__self__, "name", name)
         if next is not None:
             pulumi.set(__self__, "next", next)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
         if requirements is not None:
             pulumi.set(__self__, "requirements", requirements)
         if shared is not None:
@@ -337,6 +341,18 @@ class ChallengeDynamicIaCArgs:
 
     @_builtins.property
     @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The challenge position as displayed to players.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "position", value)
+
+    @_builtins.property
+    @pulumi.getter
     def requirements(self) -> Optional[pulumi.Input['ChallengeDynamicIaCRequirementsArgs']]:
         """
         List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
@@ -439,6 +455,7 @@ class _ChallengeDynamicIaCState:
                  minimum: Optional[pulumi.Input[_builtins.int]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  next: Optional[pulumi.Input[_builtins.int]] = None,
+                 position: Optional[pulumi.Input[_builtins.int]] = None,
                  requirements: Optional[pulumi.Input['ChallengeDynamicIaCRequirementsArgs']] = None,
                  scenario: Optional[pulumi.Input[_builtins.str]] = None,
                  shared: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -466,6 +483,7 @@ class _ChallengeDynamicIaCState:
         :param pulumi.Input[_builtins.int] minimum: The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
         :param pulumi.Input[_builtins.str] name: Name of the challenge, displayed as it.
         :param pulumi.Input[_builtins.int] next: Suggestion for the end-user as next challenge to work on.
+        :param pulumi.Input[_builtins.int] position: The challenge position as displayed to players.
         :param pulumi.Input['ChallengeDynamicIaCRequirementsArgs'] requirements: List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         :param pulumi.Input[_builtins.str] scenario: The OCI reference to the scenario.
         :param pulumi.Input[_builtins.bool] shared: Whether the instance will be shared between all players.
@@ -508,6 +526,8 @@ class _ChallengeDynamicIaCState:
             pulumi.set(__self__, "name", name)
         if next is not None:
             pulumi.set(__self__, "next", next)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
         if requirements is not None:
             pulumi.set(__self__, "requirements", requirements)
         if scenario is not None:
@@ -721,6 +741,18 @@ class _ChallengeDynamicIaCState:
 
     @_builtins.property
     @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The challenge position as displayed to players.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "position", value)
+
+    @_builtins.property
+    @pulumi.getter
     def requirements(self) -> Optional[pulumi.Input['ChallengeDynamicIaCRequirementsArgs']]:
         """
         List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
@@ -850,6 +882,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                  minimum: Optional[pulumi.Input[_builtins.int]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  next: Optional[pulumi.Input[_builtins.int]] = None,
+                 position: Optional[pulumi.Input[_builtins.int]] = None,
                  requirements: Optional[pulumi.Input[Union['ChallengeDynamicIaCRequirementsArgs', 'ChallengeDynamicIaCRequirementsArgsDict']]] = None,
                  scenario: Optional[pulumi.Input[_builtins.str]] = None,
                  shared: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -869,10 +902,11 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import ctfer-io_pulumi-ctfd as ctfd
-        import ctfer-io_pulumi-ctfdcm as ctfdcm
+        import ctfer_io_pulumi_ctfd as ctfd
+        import ctfer_io_pulumi_ctfdcm as ctfdcm
 
         http = ctfdcm.ChallengeDynamicIaC("http",
+            name="My Challenge",
             category="misc",
             description="...",
             value=500,
@@ -890,7 +924,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                 "misc",
                 "basic",
             ])
-        http_flag = ctfd.Flag("httpFlag",
+        http_flag = ctfd.Flag("http_flag",
             challenge_id=http.id,
             content="CTF{some_flag}")
         ```
@@ -913,6 +947,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] minimum: The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
         :param pulumi.Input[_builtins.str] name: Name of the challenge, displayed as it.
         :param pulumi.Input[_builtins.int] next: Suggestion for the end-user as next challenge to work on.
+        :param pulumi.Input[_builtins.int] position: The challenge position as displayed to players.
         :param pulumi.Input[Union['ChallengeDynamicIaCRequirementsArgs', 'ChallengeDynamicIaCRequirementsArgsDict']] requirements: List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         :param pulumi.Input[_builtins.str] scenario: The OCI reference to the scenario.
         :param pulumi.Input[_builtins.bool] shared: Whether the instance will be shared between all players.
@@ -938,10 +973,11 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import ctfer-io_pulumi-ctfd as ctfd
-        import ctfer-io_pulumi-ctfdcm as ctfdcm
+        import ctfer_io_pulumi_ctfd as ctfd
+        import ctfer_io_pulumi_ctfdcm as ctfdcm
 
         http = ctfdcm.ChallengeDynamicIaC("http",
+            name="My Challenge",
             category="misc",
             description="...",
             value=500,
@@ -959,7 +995,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                 "misc",
                 "basic",
             ])
-        http_flag = ctfd.Flag("httpFlag",
+        http_flag = ctfd.Flag("http_flag",
             challenge_id=http.id,
             content="CTF{some_flag}")
         ```
@@ -995,6 +1031,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
                  minimum: Optional[pulumi.Input[_builtins.int]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  next: Optional[pulumi.Input[_builtins.int]] = None,
+                 position: Optional[pulumi.Input[_builtins.int]] = None,
                  requirements: Optional[pulumi.Input[Union['ChallengeDynamicIaCRequirementsArgs', 'ChallengeDynamicIaCRequirementsArgsDict']]] = None,
                  scenario: Optional[pulumi.Input[_builtins.str]] = None,
                  shared: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -1037,6 +1074,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
             __props__.__dict__["minimum"] = minimum
             __props__.__dict__["name"] = name
             __props__.__dict__["next"] = next
+            __props__.__dict__["position"] = position
             __props__.__dict__["requirements"] = requirements
             if scenario is None and not opts.urn:
                 raise TypeError("Missing required property 'scenario'")
@@ -1076,6 +1114,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
             minimum: Optional[pulumi.Input[_builtins.int]] = None,
             name: Optional[pulumi.Input[_builtins.str]] = None,
             next: Optional[pulumi.Input[_builtins.int]] = None,
+            position: Optional[pulumi.Input[_builtins.int]] = None,
             requirements: Optional[pulumi.Input[Union['ChallengeDynamicIaCRequirementsArgs', 'ChallengeDynamicIaCRequirementsArgsDict']]] = None,
             scenario: Optional[pulumi.Input[_builtins.str]] = None,
             shared: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -1108,6 +1147,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] minimum: The minimum points for a dynamic-score challenge to reach with the decay function. Once there, no solve could have more value.
         :param pulumi.Input[_builtins.str] name: Name of the challenge, displayed as it.
         :param pulumi.Input[_builtins.int] next: Suggestion for the end-user as next challenge to work on.
+        :param pulumi.Input[_builtins.int] position: The challenge position as displayed to players.
         :param pulumi.Input[Union['ChallengeDynamicIaCRequirementsArgs', 'ChallengeDynamicIaCRequirementsArgsDict']] requirements: List of required challenges that needs to get flagged before this one being accessible. Useful for skill-trees-like strategy CTF.
         :param pulumi.Input[_builtins.str] scenario: The OCI reference to the scenario.
         :param pulumi.Input[_builtins.bool] shared: Whether the instance will be shared between all players.
@@ -1138,6 +1178,7 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         __props__.__dict__["minimum"] = minimum
         __props__.__dict__["name"] = name
         __props__.__dict__["next"] = next
+        __props__.__dict__["position"] = position
         __props__.__dict__["requirements"] = requirements
         __props__.__dict__["scenario"] = scenario
         __props__.__dict__["shared"] = shared
@@ -1276,6 +1317,14 @@ class ChallengeDynamicIaC(pulumi.CustomResource):
         Suggestion for the end-user as next challenge to work on.
         """
         return pulumi.get(self, "next")
+
+    @_builtins.property
+    @pulumi.getter
+    def position(self) -> pulumi.Output[_builtins.int]:
+        """
+        The challenge position as displayed to players.
+        """
+        return pulumi.get(self, "position")
 
     @_builtins.property
     @pulumi.getter

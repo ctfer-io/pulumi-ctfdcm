@@ -9,7 +9,7 @@ layout: package
 The CTFd-CM provider is available as a package in all Pulumi languages:
 
 - JavaScript/TypeScript: [`@ctfer-io/pulumi-ctfdcm`](https://www.npmjs.com/package/@ctfer-io/pulumi-ctfdcm)
-- Python: [`ctfer-io_pulumi-ctfdcm`](https://pypi.org/project/ctfer-io_pulumi-ctfdcm/)
+- Python: [`ctfer_io_pulumi_ctfdcm`](https://pypi.org/project/ctfer-io-pulumi-ctfdcm/)
 - Golang: [`github.com/ctfer-io/pulumi-ctfdcm/sdk/go/ctfdcm`](https://github.com/ctfer-io/pulumi-ctfdcm)
 - .NET: [`CTFerio.Ctfdcm`](https://www.nuget.org/packages/CTFerio.Ctfdcm)
 

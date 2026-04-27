@@ -17,6 +17,7 @@ import * as utilities from "./utilities";
  * import * as ctfdcm from "@ctfer-io/pulumi-ctfdcm";
  *
  * const chall = new ctfdcm.ChallengeDynamicIaC("chall", {
+ *     name: "Some challenge",
  *     category: "cat",
  *     description: "...",
  *     value: 500,
@@ -27,10 +28,12 @@ import * as utilities from "./utilities";
  *     scenario: "localhost:5000/some/scenario:v0.1.0",
  * });
  * const pandatix = new ctfd.User("pandatix", {
+ *     name: "PandatiX",
  *     email: "lucastesson@protonmail.com",
  *     password: "password",
  * });
  * const ctfer = new ctfd.Team("ctfer", {
+ *     name: "CTFer.io",
  *     email: "ctfer-io@protonmail.com",
  *     password: "ctfer",
  *     members: [pandatix.id],
@@ -73,11 +76,11 @@ export class Instance extends pulumi.CustomResource {
     /**
      * The challenge to provision an instance of.
      */
-    public readonly challengeId!: pulumi.Output<string>;
+    declare public readonly challengeId: pulumi.Output<string>;
     /**
      * The source of whom to provision an instance for.
      */
-    public readonly sourceId!: pulumi.Output<string>;
+    declare public readonly sourceId: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -92,18 +95,18 @@ export class Instance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
-            resourceInputs["challengeId"] = state ? state.challengeId : undefined;
-            resourceInputs["sourceId"] = state ? state.sourceId : undefined;
+            resourceInputs["challengeId"] = state?.challengeId;
+            resourceInputs["sourceId"] = state?.sourceId;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
-            if ((!args || args.challengeId === undefined) && !opts.urn) {
+            if (args?.challengeId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'challengeId'");
             }
-            if ((!args || args.sourceId === undefined) && !opts.urn) {
+            if (args?.sourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'sourceId'");
             }
-            resourceInputs["challengeId"] = args ? args.challengeId : undefined;
-            resourceInputs["sourceId"] = args ? args.sourceId : undefined;
+            resourceInputs["challengeId"] = args?.challengeId;
+            resourceInputs["sourceId"] = args?.sourceId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
